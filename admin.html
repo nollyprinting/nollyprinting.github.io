@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Nolly Admin</title>
+<link rel="icon" type="image/jpeg" href="logo.jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+:root { --gold: #e2b24c; --navy: #071a63; --ink: #070707; --panel: #0f1433; --line: rgba(226,178,76,.35); --text: #eef1ff; --muted: #aab4e6; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { font-family: 'DM Sans', sans-serif; background: #070a1c; color: var(--text); min-height: 100vh; }
+a { color: var(--gold); }
+
+/* top bar */
+.topbar { position: sticky; top: 0; z-index: 10; background: var(--ink); border-bottom: 2px solid var(--gold); display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 4%; flex-wrap: wrap; }
+.topbar .brand { display: flex; align-items: center; gap: 12px; }
+.topbar img { height: 44px; width: auto; border-radius: 6px; }
+.topbar h1 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--gold); }
+.topbar .right { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.topbar .who { font-size: 12px; color: var(--muted); }
+
+/* buttons */
+.btn { font-family: inherit; font-size: 14px; font-weight: 700; border: none; border-radius: 30px; padding: 11px 22px; cursor: pointer; background: var(--gold); color: var(--ink); text-decoration: none; display: inline-block; transition: .25s; }
+.btn:hover { background: #fff; }
+.btn.ghost { background: transparent; color: var(--gold); border: 1.5px solid var(--gold); }
+.btn.ghost:hover { background: var(--gold); color: var(--ink); }
+.btn.danger { background: #b3261e; color: #fff; }
+.btn.danger:hover { background: #d93a30; }
+.btn.small { padding: 7px 14px; font-size: 12px; }
+.btn.wa { background: #20c76a; color: #fff; }
+.btn:disabled { opacity: .5; cursor: wait; }
+
+/* layout */
+main { max-width: 1050px; margin: 0 auto; padding: 24px 4% 80px; }
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+.tab { font-family: inherit; font-size: 14px; font-weight: 700; padding: 11px 20px; border-radius: 30px; border: 1.5px solid var(--line); background: transparent; color: var(--text); cursor: pointer; }
+.tab.active { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+.panel h2 { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 26px; margin-bottom: 6px; }
+.panel .hint { color: var(--muted); font-size: 14px; margin-bottom: 18px; line-height: 1.6; }
+
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 18px; margin-bottom: 14px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 700px) { .grid2 { grid-template-columns: 1fr; } }
+
+label { display: block; font-size: 13px; font-weight: 700; color: #dbe3ff; margin: 12px 0 5px; }
+input[type=text], input[type=email], input[type=password], input[type=url], select, textarea {
+    width: 100%; font-family: inherit; font-size: 16px; padding: 11px 13px; border-radius: 10px;
+    border: 1px solid var(--line); background: #151a42; color: #fff;
+}
+textarea { min-height: 84px; resize: vertical; }
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
+.check { display: flex; align-items: center; gap: 8px; margin-top: 14px; font-weight: 600; }
+.check input { width: 20px; height: 20px; }
+.msg { min-height: 20px; margin-top: 10px; font-size: 14px; color: #ffe9a8; }
+.msg.err { color: #ff9b94; }
+
+/* login */
+.login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.login-card { width: min(400px, 100%); background: #070707; border: 2px solid var(--gold); border-radius: 18px; padding: 30px 26px; }
+.login-card img { display: block; height: 70px; margin: 0 auto 10px; border-radius: 8px; }
+.login-card h1 { font-family: 'Playfair Display', serif; text-align: center; color: var(--gold); margin-bottom: 6px; }
+.login-card .btn { width: 100%; margin-top: 18px; }
+.login-card .link { background: none; border: none; color: var(--gold); font-family: inherit; font-size: 13px; cursor: pointer; margin-top: 14px; width: 100%; text-decoration: underline; }
+.setup-warn { max-width: 640px; margin: 40px auto; background: #2a1a05; border: 2px solid var(--gold); border-radius: 16px; padding: 22px; line-height: 1.7; }
+
+/* orders */
+.order-top { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.order-top strong { color: var(--gold); font-size: 18px; }
+.order-top .date { color: var(--muted); font-size: 13px; }
+.who { margin-top: 6px; font-weight: 700; }
+.details { list-style: none; margin: 10px 0 14px; display: grid; gap: 4px; font-size: 14px; color: #dbe3ff; }
+.details b { color: #fff; }
+.card-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.card-actions select { width: auto; padding: 8px 12px; font-size: 14px; }
+.badge { display: inline-block; font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 20px; background: var(--gold); color: var(--ink); margin-left: 8px; vertical-align: middle; }
+.st-New { border-left: 5px solid #ffcf4d; }
+.st-In-progress { border-left: 5px solid #6ea8ff; }
+.st-Ready { border-left: 5px solid #20c76a; }
+.st-Collected { border-left: 5px solid #666; opacity: .8; }
+.toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 16px; }
+.toolbar select { width: auto; }
+
+/* gallery */
+.thumb { width: 120px; height: 80px; object-fit: contain; background: linear-gradient(135deg,#0c2a9a,#071a63); border-radius: 10px; border: 2px solid var(--gold); flex-shrink: 0; }
+.gitem { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.gitem .info { flex: 1; min-width: 180px; }
+.gitem .info h3 { color: var(--gold); font-size: 17px; }
+.gitem .info p { color: var(--muted); font-size: 13px; margin-top: 4px; }
+.gitem .acts { display: flex; gap: 8px; flex-wrap: wrap; }
+.hidden-tag { font-size: 11px; color: #ff9b94; font-weight: 800; }
+.preview { max-width: 260px; max-height: 180px; border-radius: 10px; border: 2px solid var(--gold); margin-top: 10px; display: block; }
+
+/* =====================================================================
+   VISUAL UPGRADE (look only - nothing here touches your data)
+   ===================================================================== */
+:root { --gold2: #f7d77a; --gold3: #b8862b; --glass: rgba(12,18,60,.62); }
+
+body { background: #050830; position: relative; overflow-x: hidden; }
+
+/* animated royal-satin background */
+.bg-fx { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+    background:
+        radial-gradient(900px 600px at 8% -5%, rgba(226,178,76,.30), transparent 60%),
+        radial-gradient(800px 700px at 100% 10%, rgba(40,90,255,.45), transparent 60%),
+        radial-gradient(900px 700px at 50% 120%, rgba(20,50,200,.55), transparent 60%),
+        linear-gradient(160deg, #04061f 0%, #0a1a6e 45%, #050a38 100%); }
+.bg-fx::before { content: ""; position: absolute; inset: -20%;
+    background: repeating-linear-gradient(115deg, rgba(255,255,255,.05) 0 2px, transparent 2px 38px,
+        rgba(80,130,255,.07) 38px 60px, transparent 60px 120px);
+    animation: satin 40s linear infinite; }
+.bg-fx::after { content: ""; position: absolute; inset: 0;
+    background-image:
+        radial-gradient(2px 2px at 12% 22%, #fff 50%, transparent 52%),
+        radial-gradient(2px 2px at 78% 14%, var(--gold2) 50%, transparent 52%),
+        radial-gradient(1.5px 1.5px at 40% 70%, #fff 50%, transparent 52%),
+        radial-gradient(2px 2px at 90% 66%, var(--gold2) 50%, transparent 52%),
+        radial-gradient(1.5px 1.5px at 22% 88%, var(--gold2) 50%, transparent 52%),
+        radial-gradient(2px 2px at 60% 38%, #fff 50%, transparent 52%);
+    animation: twinkle 4.5s ease-in-out infinite alternate; }
+@keyframes satin { to { transform: translate3d(120px, 0, 0); } }
+@keyframes twinkle { from { opacity: .25; } to { opacity: 1; } }
+
+#loginView, #appView, .setup-warn { position: relative; z-index: 1; }
+
+/* ---------- top bar ---------- */
+.topbar { background: linear-gradient(90deg, rgba(4,6,31,.92), rgba(10,26,110,.88)); backdrop-filter: blur(10px);
+    border-bottom: 0; box-shadow: 0 6px 24px rgba(0,0,0,.45); position: sticky; }
+.topbar::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold2), var(--gold), var(--gold3), transparent); }
+.topbar img { box-shadow: 0 0 0 2px var(--gold), 0 0 14px rgba(226,178,76,.55); }
+.topbar h1 { font-size: 22px; letter-spacing: .5px;
+    background: linear-gradient(180deg, #fff3c4, var(--gold) 55%, var(--gold3)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.topbar .who { background: rgba(255,255,255,.08); border: 1px solid var(--line); padding: 5px 12px; border-radius: 20px; }
+
+/* ---------- buttons ---------- */
+.btn { background: linear-gradient(135deg, var(--gold2), var(--gold) 55%, var(--gold3)); box-shadow: 0 4px 14px rgba(0,0,0,.35);
+    transition: transform .2s, box-shadow .2s, background .2s; }
+.btn:hover { background: linear-gradient(135deg, #fff, var(--gold2)); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(226,178,76,.35); }
+.btn:active { transform: translateY(0); }
+.btn.ghost { background: transparent; box-shadow: none; }
+.btn.ghost:hover { background: var(--gold); box-shadow: 0 6px 16px rgba(226,178,76,.3); }
+.btn.danger { background: linear-gradient(135deg, #e0453b, #b3261e); }
+.btn.wa { background: linear-gradient(135deg, #3be58a, #16a85a); }
+
+/* ---------- welcome banner ---------- */
+.welcome { position: relative; overflow: hidden; border-radius: 22px; padding: 28px 30px; margin-bottom: 26px;
+    background: linear-gradient(120deg, rgba(10,26,110,.85), rgba(5,8,48,.85) 60%), url("gold.jpeg") center/cover;
+    border: 1px solid var(--line); box-shadow: 0 14px 40px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.04); }
+.welcome::after { content: "♛"; position: absolute; right: 24px; top: -6px; font-size: 120px; line-height: 1; color: rgba(226,178,76,.16); pointer-events: none; }
+.welcome .eyebrow { color: var(--gold2); font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+.welcome h2 { font-family: 'Playfair Display', serif; font-size: clamp(24px, 4vw, 34px); color: #fff; margin: 6px 0 4px; }
+.welcome h2 span { background: linear-gradient(180deg, #fff3c4, var(--gold) 60%, var(--gold3)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.welcome p { color: var(--muted); font-size: 14px; }
+.quick { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; position: relative; z-index: 1; }
+
+/* ---------- tabs ---------- */
+.tabs { background: var(--glass); backdrop-filter: blur(8px); border: 1px solid var(--line); border-radius: 50px; padding: 6px; display: inline-flex; max-width: 100%; }
+.tab { border: 0; transition: .25s; }
+.tab:hover:not(.active) { background: rgba(226,178,76,.15); }
+.tab.active { background: linear-gradient(135deg, var(--gold2), var(--gold) 55%, var(--gold3)); box-shadow: 0 4px 14px rgba(226,178,76,.4); }
+
+/* ---------- panels and cards ---------- */
+.panel { animation: rise .45s ease both; }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.panel h2 { display: flex; align-items: center; gap: 10px; font-size: 30px; }
+.panel h2::after { content: ""; flex: 1; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); opacity: .6; }
+
+.card { background: var(--glass); backdrop-filter: blur(10px); border: 1px solid var(--line); border-radius: 18px;
+    box-shadow: 0 8px 26px rgba(0,0,0,.35); transition: transform .25s, box-shadow .25s, border-color .25s; }
+.card:hover { transform: translateY(-3px); border-color: rgba(226,178,76,.7); box-shadow: 0 14px 34px rgba(0,0,0,.5), 0 0 22px rgba(226,178,76,.12); }
+#seedCard:hover, .card:has(form):hover { transform: none; }
+.st-New { border-left: 6px solid #ffcf4d; }
+.st-In-progress { border-left: 6px solid #6ea8ff; }
+.st-Ready { border-left: 6px solid #20c76a; }
+.order-top strong { font-family: 'Playfair Display', serif; font-size: 20px; }
+.badge { background: linear-gradient(135deg, #ff6b5e, #d93a30); color: #fff; box-shadow: 0 0 10px rgba(255,107,94,.7); animation: pulse 1.8s ease-in-out infinite; }
+@keyframes pulse { 50% { transform: scale(1.18); } }
+.thumb { box-shadow: 0 0 14px rgba(226,178,76,.35); }
+
+input[type=text], input[type=email], input[type=password], input[type=url], select, textarea {
+    background: rgba(6,10,50,.75); transition: border-color .2s, box-shadow .2s; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(226,178,76,.28); }
+input[type=file] { width: 100%; padding: 12px; border: 2px dashed var(--line); border-radius: 12px; background: rgba(6,10,50,.5); color: var(--muted); cursor: pointer; }
+input[type=file]:hover { border-color: var(--gold); }
+input[type=file]::file-selector-button { font-family: inherit; font-weight: 700; border: 0; border-radius: 20px; padding: 7px 14px; margin-right: 12px;
+    background: linear-gradient(135deg, var(--gold2), var(--gold)); color: var(--ink); cursor: pointer; }
+
+/* ---------- login ---------- */
+.login-wrap { overflow: hidden; }
+.login-wrap::before { content: ""; position: absolute; inset: -30px; z-index: -1;
+    background: linear-gradient(rgba(4,6,31,.72), rgba(4,6,31,.82)), url("gold.jpeg") center/cover;
+    filter: blur(5px); transform: scale(1.05); }
+.login-card { position: relative; background: linear-gradient(160deg, rgba(10,16,70,.82), rgba(4,6,31,.9)); backdrop-filter: blur(14px);
+    border: 0; border-radius: 24px; padding: 36px 30px 30px;
+    box-shadow: 0 24px 70px rgba(0,0,0,.65), 0 0 60px rgba(226,178,76,.18); animation: rise .6s ease both; }
+.login-card::before { content: ""; position: absolute; inset: 0; border-radius: 24px; padding: 2px;
+    background: linear-gradient(135deg, var(--gold2), transparent 35%, transparent 65%, var(--gold3));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+.login-card img { height: 84px; box-shadow: 0 0 0 2px var(--gold), 0 0 26px rgba(226,178,76,.6); animation: float 4s ease-in-out infinite; }
+@keyframes float { 50% { transform: translateY(-6px); } }
+.login-card h1 { font-size: 28px; margin-top: 6px;
+    background: linear-gradient(180deg, #fff3c4, var(--gold) 60%, var(--gold3)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.login-card .sub { text-align: center; color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+.login-card .btn { padding: 13px 22px; font-size: 15px; }
+.back-home { display: block; text-align: center; margin-top: 12px; font-size: 13px; color: var(--muted); text-decoration: none; }
+.back-home:hover { color: var(--gold2); }
+
+@media (max-width: 700px) {
+    .tabs { display: flex; border-radius: 22px; }
+    .tab { flex: 1 1 auto; padding: 10px 12px; font-size: 13px; }
+    .welcome { padding: 22px 20px; }
+    .panel h2 { font-size: 24px; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* ===== SMALL SCREEN BACKGROUNDS: no cropped photo, gradients sized to the screen ===== */
+@media (max-width: 900px) {
+    .login-wrap::before { inset: 0; transform: none; filter: none;
+        background: radial-gradient(120% 55% at 50% 0%, rgba(226,178,76,.18), transparent 70%), linear-gradient(170deg, #050a38, #0a1a6e 60%, #04061f); }
+    .welcome { background: linear-gradient(120deg, rgba(10,26,110,.95), rgba(5,8,48,.95)); }
+    .bg-fx {
+        background:
+            radial-gradient(90% 40% at 10% 0%, rgba(226,178,76,.22), transparent 70%),
+            radial-gradient(90% 50% at 100% 18%, rgba(40,90,255,.40), transparent 70%),
+            radial-gradient(100% 50% at 50% 100%, rgba(20,50,200,.50), transparent 70%),
+            linear-gradient(170deg, #04061f 0%, #0a1a6e 50%, #050a38 100%); }
+    .bg-fx::before { display: none; }
+}
+
+/* ===== PHONE FIXES ===== */
+html { -webkit-text-size-adjust: 100%; }
+img { max-width: 100%; }
+@media (hover: none) { .card:hover, .btn:hover { transform: none; } }
+@media (max-width: 700px) {
+    .topbar { padding: 8px 12px; gap: 8px; }
+    .topbar img { height: 36px; }
+    .topbar h1 { font-size: 18px; }
+    .topbar .right { width: 100%; justify-content: space-between; gap: 8px; }
+    .topbar .who { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    main { padding: 16px 12px 70px; }
+    .welcome { padding: 20px 16px; border-radius: 18px; }
+    .welcome::after { font-size: 80px; }
+    .quick .btn { flex: 1 1 100%; text-align: center; }
+    .tabs { width: 100%; }
+    .tab { padding: 12px 8px; font-size: 13px; }
+    .panel h2 { font-size: 22px; }
+    .toolbar .btn, .toolbar select { flex: 1 1 100%; width: 100%; text-align: center; }
+    .card { padding: 14px; }
+    .card-actions .btn { flex: 1 1 auto; text-align: center; }
+    .card-actions select { flex: 1 1 100%; width: 100%; }
+    .btn.small { padding: 10px 14px; }
+    .gitem .thumb { width: 100%; height: auto; max-height: 200px; }
+    .gitem .info { flex-basis: 100%; }
+    .gitem .acts .btn { flex: 1 1 auto; text-align: center; }
+    .seedgrid { grid-template-columns: 1fr; }
+    .sgroup summary { padding: 14px; }
+    .sbody { padding: 4px 14px 14px; }
+    .login-card { padding: 28px 20px 24px; }
+    .bg-fx::before { animation: none; }
+}
+
+
+/* ---------- site details: fold-out sections ---------- */
+.sgroup { background: var(--glass); backdrop-filter: blur(8px); border: 1px solid var(--line); border-radius: 16px; margin-bottom: 12px; overflow: hidden; }
+.sgroup summary { cursor: pointer; list-style: none; padding: 15px 18px; font-weight: 700; font-size: 16px; display: flex; align-items: center; gap: 10px; color: var(--gold2); }
+.sgroup summary::-webkit-details-marker { display: none; }
+.sgroup summary::after { content: "+"; margin-left: auto; font-size: 22px; color: var(--gold); }
+.sgroup[open] summary::after { content: "\2212"; }
+.sgroup summary small { color: var(--muted); font-weight: 500; font-size: 12px; }
+.sgroup[open] summary { border-bottom: 1px solid var(--line); }
+.sbody { padding: 4px 18px 16px; }
+.slabel { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 14px 0 5px; }
+.slabel label { margin: 0; flex: 1 1 220px; }
+.edited-tag { font-size: 11px; font-weight: 800; padding: 2px 9px; border-radius: 20px; background: rgba(110,168,255,.2); color: #9cc4ff; border: 1px solid #6ea8ff; }
+.reset-btn { font-family: inherit; font-size: 12px; font-weight: 700; color: var(--gold); background: none; border: 1px solid var(--line); border-radius: 20px; padding: 3px 11px; cursor: pointer; }
+.reset-btn:hover { background: var(--gold); color: var(--ink); }
+.sfield.is-edited input, .sfield.is-edited textarea { border-color: #6ea8ff; }
+.livebar { display: inline-block; padding: 9px 16px; margin-bottom: 16px; border-radius: 30px; font-size: 14px; background: var(--glass); border: 1px solid var(--line); }
+.seedgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.seedgrid figure { background: rgba(6,10,50,.6); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.seedgrid img { width: 100%; height: 120px; object-fit: contain; background: linear-gradient(135deg,#0c2a9a,#071a63); display: block; }
+.seedgrid .sp-body { padding: 4px 12px 12px; }
+.seedgrid .sp-body label { font-size: 12px; margin: 8px 0 3px; }
+.seedgrid .sp-body input, .seedgrid .sp-body textarea { font-size: 13px; padding: 8px 10px; }
+.seedgrid .sp-body textarea { min-height: 96px; }
+.seedgrid .sp-body input[type=file] { padding: 7px; font-size: 12px; }
+.seedgrid .sp-body small { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; }
+.seedgrid { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+.seedgrid figcaption { padding: 10px 12px; font-size: 13px; }
+.seedgrid figcaption span { display: block; color: var(--muted); font-size: 12px; margin-top: 3px; line-height: 1.5; }
+</style>
+</head>
+
+<body>
+<div class="bg-fx" aria-hidden="true"></div>
+
+<!-- SETUP MESSAGE (shown until firebase-config.js is filled in) -->
+<div class="setup-warn" id="setupWarn" hidden>
+<h2 style="color:var(--gold);font-family:'Playfair Display',serif;">One-time setup needed</h2>
+<p>This admin page needs a free Firebase project. Open <b>firebase-config.js</b>, paste your Firebase values into it, save, and reload this page. The setup steps are in the instructions I sent with this page.</p>
+</div>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginView" hidden>
+<form class="login-card" id="loginForm" novalidate>
+<img src="logo.jpeg" alt="Nolly logo">
+<h1>Admin log in</h1>
+<p class="sub">Nolly Printing &amp; Embroidery · Control room</p>
+<label for="loginEmail">Email</label>
+<input type="email" id="loginEmail" autocomplete="username" placeholder="Admin email" required>
+<label for="loginPassword">Password</label>
+<input type="password" id="loginPassword" autocomplete="current-password" placeholder="Your password" required>
+<button type="submit" class="btn" id="loginBtn">Log in</button>
+<button type="button" class="link" id="resetBtn">Forgot password? Email me a reset link</button>
+<p class="msg" id="loginMsg" role="status" aria-live="polite"></p>
+<a class="back-home" href="./">← Back to website</a>
+</form>
+</div>
+
+<!-- APP -->
+<div id="appView" hidden>
+
+<div class="topbar">
+<div class="brand"><img src="logo.jpeg" alt="Nolly logo"><h1>Nolly Admin</h1></div>
+<div class="right">
+<span class="who" id="whoAmI"></span>
+<a class="btn ghost small" href="./" target="_blank" rel="noopener">View website</a>
+<button class="btn small" id="logoutBtn" type="button">Log out</button>
+</div>
+</div>
+
+<main>
+
+<div class="welcome">
+<div class="eyebrow" id="todayText">Welcome back</div>
+<h2><span id="greetText">Hello</span>, boss 👑</h2>
+<p>Here is your control room. Check new orders, update your gallery or change your website details.</p>
+<div class="quick">
+<button class="btn small" type="button" data-goto="orders">📦 See orders</button>
+<button class="btn ghost small" type="button" data-goto="gallery">🖼️ Add gallery item</button>
+<button class="btn ghost small" type="button" data-goto="site">⚙️ Edit site details</button>
+</div>
+</div>
+
+<div class="tabs" role="tablist">
+<button class="tab active" data-tab="orders" type="button">📦 Orders <span class="badge" id="newBadge" hidden>0</span></button>
+<button class="tab" data-tab="gallery" type="button">🖼️ Gallery</button>
+<button class="tab" data-tab="site" type="button">⚙️ Site details</button>
+</div>
+
+<!-- ORDERS -->
+<section class="panel" id="tab-orders">
+<h2>Orders</h2>
+<p class="hint">Every order sent from the website appears here, with sizes, colours and wording. Change the status as you work on it.</p>
+<div class="toolbar">
+<select id="orderFilter" aria-label="Filter orders">
+<option value="all">All orders</option>
+<option>New</option>
+<option>In progress</option>
+<option>Ready</option>
+<option>Collected</option>
+</select>
+<button class="btn ghost small" id="csvBtn" type="button">Download list (CSV)</button>
+</div>
+<div id="ordersList"></div>
+</section>
+
+<!-- GALLERY -->
+<section class="panel" id="tab-gallery" hidden>
+<h2>Gallery</h2>
+<p class="hint">These are the pictures and products shown in the gallery on your website. Add a new one, change a picture, put them in a different order, or hide one for a while.</p>
+<div class="livebar" id="galleryCount"></div>
+
+<div class="card" id="seedCard" hidden>
+<p style="margin-bottom:12px;"><b>Your website is showing these 4 built-in pictures right now.</b> You can change the heading, description or photo of each one separately below (leave a photo box empty to keep the current photo). Then press the button once to bring them into your gallery. After that, every item has its own <b>Edit</b> button for changing its photo, heading and description again at any time.</p>
+<div id="seedPreview" class="seedgrid"></div>
+<button class="btn" id="seedBtn" type="button">Load these into my gallery</button>
+<p class="msg" id="seedMsg"></p>
+</div>
+
+<div class="card">
+<h3 id="gFormTitle" style="color:var(--gold);">Add a new gallery item</h3>
+<form id="gForm" novalidate>
+<label for="gImage">Picture</label>
+<input type="file" id="gImage" accept="image/*">
+<img class="preview" id="gPreview" alt="" hidden>
+<label for="gTitle">Title</label>
+<input type="text" id="gTitle" placeholder="e.g. Hoodies" required>
+<label for="gText">Short description</label>
+<textarea id="gText" placeholder="What the customer should know"></textarea>
+<div class="grid2">
+<div>
+<label for="gBtn">Button text</label>
+<input type="text" id="gBtn" placeholder="e.g. Order now" value="Order now">
+</div>
+<div>
+<label for="gType">Order form to open</label>
+<select id="gType">
+<option value="general">General (quantity, colour, wording)</option>
+<option value="golf">Golf T-shirts (with sizes)</option>
+<option value="caps">Caps</option>
+<option value="shawls">Wedding shawls</option>
+<option value="bridal">Bridal gowns and robes</option>
+</select>
+</div>
+</div>
+<label class="check"><input type="checkbox" id="gVisible" checked> Show on the website</label>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;">
+<button class="btn" id="gSave" type="submit">Save item</button>
+<button class="btn ghost" id="gCancel" type="button" hidden>Cancel editing</button>
+</div>
+<p class="msg" id="gMsg" role="status" aria-live="polite"></p>
+</form>
+</div>
+
+<div id="galleryList"></div>
+</section>
+
+<!-- SITE DETAILS -->
+<section class="panel" id="tab-site" hidden>
+<h2>Site details</h2>
+<p class="hint">Every box below already shows the wording that is on your website right now. Open a section, change what you want and press <b>Save site details</b>, then refresh your website to see it. A box marked <span class="edited-tag" style="display:inline-block">edited</span> is different from the original wording, and <b>&#8634; Original</b> puts the first wording back. Leaving a box empty keeps the website's built-in text.</p>
+<div class="toolbar"><a class="btn ghost small" href="./" target="_blank" rel="noopener">&#128065; Open website to compare</a><button class="btn ghost small" type="button" id="expandAll">Open all sections</button><button class="btn ghost small" type="button" id="collapseAll">Close all sections</button></div>
+<form class="card" id="siteForm" novalidate>
+<div id="siteFields"></div>
+<button class="btn" type="submit" style="margin-top:20px;">Save site details</button>
+<p class="msg" id="siteMsg" role="status" aria-live="polite"></p>
+</form>
+</section>
+
+</main>
+</div>
+
+<!-- Firebase -->
+<script src="firebase-config.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+
+<script>
+/* ---------- helpers ---------- */
+const $ = id => document.getElementById(id);
+function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+function toIntl(n) {
+    let d = String(n || "").replace(/\D/g, "");
+    if (d.startsWith("0")) d = "27" + d.slice(1);
+    return d;
+}
+function setMsg(el, text, isErr) { el.textContent = text || ""; el.classList.toggle("err", !!isErr); }
+
+/* ---------- start-up ---------- */
+const cfg = window.NOLLY_FIREBASE;
+const configured = cfg && cfg.apiKey && String(cfg.apiKey).indexOf("PASTE") !== 0 && typeof firebase !== "undefined";
+
+let auth = null, db = null;
+let unsubOrders = null, unsubGallery = null;
+let orders = [], gallery = [], editingId = null, firstOrdersLoad = true;
+
+if (!configured) {
+    $("setupWarn").hidden = false;
+} else {
+    firebase.initializeApp(cfg);
+    auth = firebase.auth();
+    db = firebase.firestore();
+
+    /* Ask for the password every time the admin page is opened:
+       - the login is only remembered for this one tab (it is forgotten when the tab or browser is closed)
+       - any older saved login is cleared the first time this tab opens the page */
+    const startAuth = () => auth.onAuthStateChanged(onAuth);
+    auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        .then(() => {
+            let fresh = true;
+            try { fresh = !sessionStorage.getItem("nollyAdminTab"); sessionStorage.setItem("nollyAdminTab", "1"); } catch (e) {}
+            return fresh ? auth.signOut() : null;
+        })
+        .catch(() => {})
+        .then(startAuth);
+}
+
+function onAuth(user) {
+    if (user) {
+        $("loginView").hidden = true;
+        $("appView").hidden = false;
+        $("whoAmI").textContent = user.email || "";
+        startListeners();
+        loadSite();
+    } else {
+        stopListeners();
+        $("appView").hidden = true;
+        $("loginView").hidden = false;
+    }
+}
+
+function stopListeners() {
+    if (unsubOrders) { unsubOrders(); unsubOrders = null; }
+    if (unsubGallery) { unsubGallery(); unsubGallery = null; }
+    orders = []; gallery = []; firstOrdersLoad = true;
+}
+
+/* ---------- login ---------- */
+$("loginForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const email = $("loginEmail").value.trim();
+    const pw = $("loginPassword").value;
+    if (!email || !pw) { setMsg($("loginMsg"), "Please enter your email and password.", true); return; }
+    $("loginBtn").disabled = true;
+    setMsg($("loginMsg"), "Logging in...");
+    auth.signInWithEmailAndPassword(email, pw)
+        .then(() => { $("loginPassword").value = ""; setMsg($("loginMsg"), ""); })
+        .catch(() => setMsg($("loginMsg"), "Wrong email or password. Please try again.", true))
+        .finally(() => { $("loginBtn").disabled = false; });
+});
+
+$("resetBtn").addEventListener("click", () => {
+    const email = $("loginEmail").value.trim();
+    if (!email) { setMsg($("loginMsg"), "Type your admin email above first, then press this again.", true); return; }
+    auth.sendPasswordResetEmail(email)
+        .then(() => setMsg($("loginMsg"), "If that email is an admin account, a reset link has been sent."))
+        .catch(() => setMsg($("loginMsg"), "Could not send the reset email. Check the address.", true));
+});
+
+$("logoutBtn").addEventListener("click", () => auth.signOut());
+
+/* ---------- tabs ---------- */
+document.querySelectorAll(".tab").forEach(t => {
+    t.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach(x => x.classList.toggle("active", x === t));
+        ["orders", "gallery", "site"].forEach(name => { $("tab-" + name).hidden = (name !== t.dataset.tab); });
+    });
+});
+
+function permissionHelp() {
+    return "This account is not allowed to manage the site. Check that its ID is in the Firestore rules.";
+}
+
+/* ---------- listeners ---------- */
+function startListeners() {
+    unsubOrders = db.collection("orders").orderBy("createdAt", "desc").onSnapshot(snap => {
+        orders = snap.docs.map(d => Object.assign({ id: d.id }, d.data()));
+        renderOrders();
+        firstOrdersLoad = false;
+    }, err => {
+        $("ordersList").innerHTML = '<div class="card">' + esc(err.code === "permission-denied" ? permissionHelp() : "Could not load orders.") + "</div>";
+    });
+
+    unsubGallery = db.collection("gallery").orderBy("order").onSnapshot(snap => {
+        gallery = snap.docs.map(d => Object.assign({ id: d.id }, d.data()));
+        renderGallery();
+    }, err => {
+        $("galleryList").innerHTML = '<div class="card">' + esc(err.code === "permission-denied" ? permissionHelp() : "Could not load the gallery.") + "</div>";
+    });
+}
+
+/* ================= ORDERS ================= */
+const STATUSES = ["New", "In progress", "Ready", "Collected"];
+
+function fmtDate(ts) {
+    if (!ts || !ts.toDate) return "Just now";
+    return ts.toDate().toLocaleString("en-ZA", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
+}
+
+function renderOrders() {
+    const filter = $("orderFilter").value;
+    const list = orders.filter(o => filter === "all" || (o.status || "New") === filter);
+
+    const newCount = orders.filter(o => (o.status || "New") === "New").length;
+    $("newBadge").hidden = newCount === 0;
+    $("newBadge").textContent = newCount;
+    document.title = (newCount ? "(" + newCount + ") " : "") + "Nolly Admin";
+
+    const box = $("ordersList");
+    if (!list.length) {
+        box.innerHTML = '<div class="card">No orders to show yet.</div>';
+        return;
+    }
+    box.innerHTML = list.map(o => {
+        const status = o.status || "New";
+        const details = Object.entries(o.details || {}).map(([k, v]) => "<li><b>" + esc(k) + ":</b> " + esc(v) + "</li>").join("");
+        const intl = toIntl(o.phone);
+        const waLink = intl ? "https://wa.me/" + intl + "?text=" + encodeURIComponent("Hi " + (o.name || "") + ", this is Nolly Printing & Embroidery about your " + (o.item || "") + " order.") : "";
+        return '<article class="card st-' + esc(status.replace(/\s+/g, "-")) + '">' +
+            '<div class="order-top"><strong>' + esc(o.item) + '</strong><span class="date">' + esc(fmtDate(o.createdAt)) + "</span></div>" +
+            '<p class="who">' + esc(o.name) + (o.phone ? " &middot; " + esc(o.phone) : "") + "</p>" +
+            '<ul class="details">' + details + "</ul>" +
+            '<div class="card-actions">' +
+            '<select data-status="' + esc(o.id) + '" aria-label="Order status">' + STATUSES.map(s => "<option" + (s === status ? " selected" : "") + ">" + s + "</option>").join("") + "</select>" +
+            (waLink ? '<a class="btn wa small" href="' + esc(waLink) + '" target="_blank" rel="noopener noreferrer">WhatsApp customer</a>' : "") +
+            '<button class="btn danger small" data-del-order="' + esc(o.id) + '" type="button">Delete</button>' +
+            "</div></article>";
+    }).join("");
+}
+
+$("orderFilter").addEventListener("change", renderOrders);
+
+$("ordersList").addEventListener("change", e => {
+    const sel = e.target.closest("select[data-status]");
+    if (!sel) return;
+    db.collection("orders").doc(sel.dataset.status).update({ status: sel.value }).catch(() => alert("Could not change the status. Please try again."));
+});
+
+$("ordersList").addEventListener("click", e => {
+    const btn = e.target.closest("[data-del-order]");
+    if (!btn) return;
+    if (confirm("Delete this order for good?")) {
+        db.collection("orders").doc(btn.dataset.delOrder).delete().catch(() => alert("Could not delete the order."));
+    }
+});
+
+$("csvBtn").addEventListener("click", () => {
+    if (!orders.length) { alert("There are no orders to download yet."); return; }
+    const q = v => '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"';
+    const rows = [["Date", "Status", "Name", "Phone", "Item", "Details"]];
+    orders.forEach(o => {
+        const det = Object.entries(o.details || {}).map(([k, v]) => k + ": " + v).join(" | ");
+        rows.push([fmtDate(o.createdAt), o.status || "New", o.name, o.phone, o.item, det]);
+    });
+    const csv = "\ufeff" + rows.map(r => r.map(q).join(",")).join("\n");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+    a.download = "nolly-orders.csv";
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+});
+
+/* ================= GALLERY ================= */
+const SEED = [
+    { file: "shirts.jpeg", title: "Golf T-shirts", text: "Blue or white polos with your company or club logo printed on the chest.", btn: "Add your logo", type: "golf" },
+    { file: "caps.jpeg", title: "Caps", text: "Matching caps with your logo printed or embroidered on the front.", btn: "Add your logo", type: "caps" },
+    { file: "shawls-ad.jpeg", title: "Wedding Shawls", text: "White shawls embroidered with your name and surname, in your choice of colour and design.", btn: "Add your name", type: "shawls" },
+    { file: "white.jpeg", title: "Bridal Gowns and Robes", text: "Satin bridal robes and gowns embroidered with \"Bride\" or your own wording.", btn: "Customise yours", type: "bridal" }
+];
+
+/* each built-in item can be changed on its own before it is loaded: heading, description and photo */
+$("seedPreview").innerHTML = SEED.map((s, i) =>
+    '<figure><img id="sp_img_' + i + '" src="' + esc(s.file) + '" alt="">' +
+    '<div class="sp-body">' +
+    '<label for="sp_title_' + i + '">Heading</label><input type="text" id="sp_title_' + i + '" value="' + esc(s.title) + '">' +
+    '<label for="sp_text_' + i + '">Description</label><textarea id="sp_text_' + i + '">' + esc(s.text) + '</textarea>' +
+    '<label for="sp_file_' + i + '">Photo</label><input type="file" id="sp_file_' + i + '" accept="image/*">' +
+    '<small id="sp_note_' + i + '">Keeping the current photo</small></div></figure>').join("");
+
+SEED.forEach((s, i) => {
+    $("sp_file_" + i).addEventListener("change", () => {
+        const f = $("sp_file_" + i).files[0];
+        if (f) { $("sp_img_" + i).src = URL.createObjectURL(f); $("sp_note_" + i).textContent = "New photo chosen: " + f.name; }
+        else { $("sp_img_" + i).src = s.file; $("sp_note_" + i).textContent = "Keeping the current photo"; }
+    });
+});
+
+/* shrink a photo so it fits in the database (about 700 KB at most) */
+function compressImage(fileOrBlob, maxSide) {
+    return new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(fileOrBlob);
+        const img = new Image();
+        img.onload = () => {
+            URL.revokeObjectURL(url);
+            let side = maxSide || 900;
+            for (let attempt = 0; attempt < 6; attempt++) {
+                const scale = Math.min(1, side / Math.max(img.width, img.height));
+                const c = document.createElement("canvas");
+                c.width = Math.max(1, Math.round(img.width * scale));
+                c.height = Math.max(1, Math.round(img.height * scale));
+                const ctx = c.getContext("2d");
+                ctx.fillStyle = "#ffffff";
+                ctx.fillRect(0, 0, c.width, c.height);
+                ctx.drawImage(img, 0, 0, c.width, c.height);
+                for (let q = 0.85; q >= 0.5; q -= 0.1) {
+                    const data = c.toDataURL("image/jpeg", q);
+                    if (data.length < 700000) { resolve(data); return; }
+                }
+                side = Math.round(side * 0.8);
+            }
+            reject(new Error("That picture is too big. Try a smaller one."));
+        };
+        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("Could not read that picture.")); };
+        img.src = url;
+    });
+}
+
+function renderGallery() {
+    $("seedCard").hidden = gallery.length > 0;
+    const shown = gallery.filter(g => g.visible !== false).length;
+    $("galleryCount").innerHTML = gallery.length
+        ? "&#128994; <b>Live on your website now:</b> " + shown + " item" + (shown === 1 ? "" : "s") + (gallery.length - shown ? " &middot; " + (gallery.length - shown) + " hidden" : "")
+        : "&#128993; <b>Live on your website now:</b> the 4 built-in pictures (not editable until you load them below)";
+    const box = $("galleryList");
+    if (!gallery.length) { box.innerHTML = ""; return; }
+    box.innerHTML = gallery.map((g, i) => {
+        return '<div class="card gitem">' +
+            '<img class="thumb" src="' + esc(g.image) + '" alt="">' +
+            '<div class="info"><h3>' + esc(g.title) + (g.visible === false ? ' <span class="hidden-tag">HIDDEN</span>' : "") + "</h3><p>" + esc(g.text) + "</p></div>" +
+            '<div class="acts">' +
+            '<button class="btn ghost small" data-g="up" data-id="' + esc(g.id) + '" type="button"' + (i === 0 ? " disabled" : "") + ' aria-label="Move up">&uarr;</button>' +
+            '<button class="btn ghost small" data-g="down" data-id="' + esc(g.id) + '" type="button"' + (i === gallery.length - 1 ? " disabled" : "") + ' aria-label="Move down">&darr;</button>' +
+            '<button class="btn small" data-g="edit" data-id="' + esc(g.id) + '" type="button">Edit</button>' +
+            '<button class="btn ghost small" data-g="toggle" data-id="' + esc(g.id) + '" type="button">' + (g.visible === false ? "Show" : "Hide") + "</button>" +
+            '<button class="btn danger small" data-g="del" data-id="' + esc(g.id) + '" type="button">Delete</button>' +
+            "</div></div>";
+    }).join("");
+}
+
+$("galleryList").addEventListener("click", e => {
+    const b = e.target.closest("[data-g]");
+    if (!b) return;
+    const id = b.dataset.id;
+    const idx = gallery.findIndex(g => g.id === id);
+    const item = gallery[idx];
+    if (!item) return;
+    const act = b.dataset.g;
+
+    if (act === "edit") {
+        editingId = id;
+        $("gFormTitle").textContent = "Edit: " + item.title;
+        $("gTitle").value = item.title || "";
+        $("gText").value = item.text || "";
+        $("gBtn").value = item.btn || "Order now";
+        $("gType").value = item.type || "general";
+        $("gVisible").checked = item.visible !== false;
+        $("gImage").value = "";
+        $("gPreview").src = item.image;
+        $("gPreview").hidden = false;
+        $("gCancel").hidden = false;
+        setMsg($("gMsg"), "Change what you need and press Save. Leave the picture box empty to keep the current picture.");
+        $("gForm").scrollIntoView({ behavior: "smooth", block: "start" });
+    } else if (act === "toggle") {
+        db.collection("gallery").doc(id).update({ visible: item.visible === false }).catch(() => alert("Could not save. Please try again."));
+    } else if (act === "del") {
+        if (confirm('Delete "' + item.title + '" from the gallery for good?')) {
+            db.collection("gallery").doc(id).delete().catch(() => alert("Could not delete."));
+        }
+    } else if (act === "up" || act === "down") {
+        const other = gallery[act === "up" ? idx - 1 : idx + 1];
+        if (!other) return;
+        const batch = db.batch();
+        batch.update(db.collection("gallery").doc(item.id), { order: other.order });
+        batch.update(db.collection("gallery").doc(other.id), { order: item.order });
+        batch.commit().catch(() => alert("Could not change the order."));
+    }
+});
+
+function resetGalleryForm() {
+    editingId = null;
+    $("gForm").reset();
+    $("gBtn").value = "Order now";
+    $("gVisible").checked = true;
+    $("gPreview").hidden = true;
+    $("gPreview").removeAttribute("src");
+    $("gCancel").hidden = true;
+    $("gFormTitle").textContent = "Add a new gallery item";
+}
+
+$("gCancel").addEventListener("click", () => { resetGalleryForm(); setMsg($("gMsg"), ""); });
+
+$("gImage").addEventListener("change", () => {
+    const f = $("gImage").files[0];
+    if (!f) return;
+    $("gPreview").src = URL.createObjectURL(f);
+    $("gPreview").hidden = false;
+});
+
+$("gForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const title = $("gTitle").value.trim();
+    const file = $("gImage").files[0];
+    if (!title) { setMsg($("gMsg"), "Please type a title.", true); return; }
+    if (!editingId && !file) { setMsg($("gMsg"), "Please choose a picture.", true); return; }
+
+    $("gSave").disabled = true;
+    setMsg($("gMsg"), "Saving...");
+    try {
+        const data = {
+            title: title,
+            text: $("gText").value.trim(),
+            btn: $("gBtn").value.trim() || "Order now",
+            type: $("gType").value,
+            visible: $("gVisible").checked
+        };
+        if (file) data.image = await compressImage(file, 900);
+
+        if (editingId) {
+            await db.collection("gallery").doc(editingId).update(data);
+        } else {
+            const maxOrder = gallery.reduce((m, g) => Math.max(m, g.order || 0), 0);
+            data.order = maxOrder + 1;
+            await db.collection("gallery").add(data);
+        }
+        resetGalleryForm();
+        setMsg($("gMsg"), "Saved. It is now live on the website.");
+    } catch (err) {
+        setMsg($("gMsg"), err && err.message ? err.message : "Could not save. Please try again.", true);
+    } finally {
+        $("gSave").disabled = false;
+    }
+});
+
+$("seedBtn").addEventListener("click", async () => {
+    $("seedBtn").disabled = true;
+    setMsg($("seedMsg"), "Loading pictures...");
+    try {
+        /* first get all 4 photos (a new one you chose, or the current one); save nothing until every photo is ready */
+        const blobs = [], missing = [];
+        for (let i = 0; i < SEED.length; i++) {
+            const chosen = $("sp_file_" + i).files[0];
+            if (chosen) { blobs.push(chosen); continue; }
+            try {
+                const res = await fetch(SEED[i].file);
+                if (!res.ok) throw new Error("not found");
+                blobs.push(await res.blob());
+            } catch (e) { blobs.push(null); missing.push(SEED[i].title); }
+        }
+        if (missing.length) {
+            setMsg($("seedMsg"), "Your browser can't load the current photo by itself for: " + missing.join(", ") + ". This only happens when the page is opened from a file on your computer (once the site is online it is automatic). Under the Photo box of each of those items, press Choose file and pick its picture, then press the button again.", true);
+            return;
+        }
+        for (let i = 0; i < SEED.length; i++) {
+            const image = await compressImage(blobs[i], 900);
+            await db.collection("gallery").add({
+                title: $("sp_title_" + i).value.trim() || SEED[i].title,
+                text: $("sp_text_" + i).value.trim(),
+                btn: SEED[i].btn, type: SEED[i].type, visible: true, order: i + 1, image: image
+            });
+        }
+        setMsg($("seedMsg"), "Done. Each item now has its own Edit button below.");
+    } catch (err) {
+        setMsg($("seedMsg"), (err && err.code === "permission-denied") ? permissionHelp() : "Could not save the pictures. Please try again.", true);
+    } finally {
+        $("seedBtn").disabled = false;
+    }
+});
+
+/* ================= SITE DETAILS ================= */
+const SITE_FIELDS = [
+    { g: "🏠 Home page", k: "announcement", label: "Announcement banner at the very top (e.g. 'Closed on 16 December'). Leave empty to hide it.", type: "text", def: "" },
+    { g: "🏠 Home page", k: "heroTag", label: "Small tag above the headline", type: "text", def: "PRINTING • EMBROIDERY • BRIDAL" },
+    { g: "🏠 Home page", k: "heroTitle", label: "Main headline", type: "textarea", def: "Custom printing and embroidery for your team, your brand and your big day." },
+    { g: "🏠 Home page", k: "heroText", label: "Sentence under the headline", type: "textarea", def: "Golf T-shirts, caps, bridal gowns and personalised wedding shawls, made in Soshanguve." },
+    { g: "👑 About us", k: "aboutTitle", label: "About section title", type: "text", def: "About Nolly Printing & Embroidery" },
+    { g: "👑 About us", k: "aboutSub", label: "About section sub-title", type: "text", def: "Creativity, quality and attention to detail." },
+    { g: "👑 About us", k: "aboutHeading", label: "Heading next to the picture", type: "text", def: "More Than Just Printing." },
+    { g: "👑 About us", k: "aboutP1", label: "Paragraph 1", type: "textarea", def: "At Nolly Printing & Embroidery, we print and embroider golf T-shirts and caps with your own logo, and we make bridal gowns, robes and wedding shawls with your name and surname." },
+    { g: "👑 About us", k: "aboutP2", label: "Paragraph 2", type: "textarea", def: "Whether it is a company team, a golf day or a wedding, we take care of every detail so your order arrives looking exactly the way you pictured it." },
+    { g: "👑 About us", k: "aboutP3", label: "Paragraph 3", type: "textarea", def: "We focus on making every order special, because your brand deserves to stand out." },
+    { g: "🧵 Services", k: "servicesTitle", label: "Services title", type: "text", def: "Our Services" },
+    { g: "🧵 Services", k: "servicesSub", label: "Services sub-title", type: "text", def: "Printing and embroidery for businesses, teams and weddings." },
+    { g: "🧵 Services", k: "svc1Title", label: "Service 1 name", type: "text", def: "Golf T-shirts" },
+    { g: "🧵 Services", k: "svc1Text", label: "Service 1 description", type: "textarea", def: "Printed golf T-shirts with your logo on the chest." },
+    { g: "🧵 Services", k: "svc2Title", label: "Service 2 name", type: "text", def: "Caps" },
+    { g: "🧵 Services", k: "svc2Text", label: "Service 2 description", type: "textarea", def: "Embroidered and printed caps with your logo." },
+    { g: "🧵 Services", k: "svc3Title", label: "Service 3 name", type: "text", def: "Bridal Gowns and Robes" },
+    { g: "🧵 Services", k: "svc3Text", label: "Service 3 description", type: "textarea", def: "Satin bridal robes and gowns embroidered with your wording." },
+    { g: "🧵 Services", k: "svc4Title", label: "Service 4 name", type: "text", def: "Wedding Shawls" },
+    { g: "🧵 Services", k: "svc4Text", label: "Service 4 description", type: "textarea", def: "White shawls embroidered with your name and surname." },
+    { g: "🖼️ Gallery wording", k: "galleryTitle", label: "Gallery title", type: "text", def: "Our Gallery" },
+    { g: "🖼️ Gallery wording", k: "galleryIntro", label: "Gallery sub-title", type: "text", def: "A glimpse into the world of Nolly." },
+    { g: "🖼️ Gallery wording", k: "galleryNote", label: "Note under the gallery pictures", type: "textarea", def: "Designs shown (such as \"Your Logo Here\" and \"Becoming Mrs Setati\") are samples. Fill in the order form and send us your logo or name on WhatsApp and we will customise it for you." },
+    { g: "☎️ Contact and orders", k: "contactTitle", label: "Order section title", type: "text", def: "Place Your Order" },
+    { g: "☎️ Contact and orders", k: "contactIntro", label: "Order section sub-title", type: "text", def: "Send us a WhatsApp message or call to get started." },
+    { g: "☎️ Contact and orders", k: "phone1", label: "Phone and WhatsApp number 1", type: "text", def: "072 655 1662" },
+    { g: "☎️ Contact and orders", k: "phone2", label: "Phone and WhatsApp number 2 (optional)", type: "text", def: "071 367 1096" },
+    { g: "☎️ Contact and orders", k: "orderWhatsapp", label: "WhatsApp number that receives website orders", type: "text", def: "072 655 1662" },
+    { g: "☎️ Contact and orders", k: "email", label: "Email address", type: "email", def: "rose007@gmail.com" },
+    { g: "☎️ Contact and orders", k: "address", label: "Address (one line per row)", type: "textarea", def: "Mollo Street\nBlock VV 7372/20\nSoshanguve 0152" },
+    { g: "☎️ Contact and orders", k: "mapsLink", label: "Google Maps link for the Get directions button", type: "url", def: "https://maps.app.goo.gl/2btHksqiE79HpRJj7" },
+    { g: "☎️ Contact and orders", k: "hoursMain", label: "Operating hours", type: "text", def: "Open 24/7" },
+    { g: "☎️ Contact and orders", k: "hoursNote", label: "Note under the hours", type: "text", def: "Orders ready from 5 business days minimum." },
+    { g: "📌 Footer", k: "footerTagline", label: "Line at the very bottom of the website", type: "text", def: "Creativity in every print. Excellence in every stitch." }
+];
+
+/* each section is a fold-out so it is easy to find things; every box starts with what the website shows right now */
+(function buildSiteForm() {
+    let html = "", group = null;
+    SITE_FIELDS.forEach(f => {
+        if (f.g !== group) {
+            if (group !== null) html += "</div></details>";
+            group = f.g;
+            const n = SITE_FIELDS.filter(x => x.g === f.g).length;
+            html += '<details class="sgroup"' + (f.g === SITE_FIELDS[0].g ? " open" : "") + "><summary>" + esc(f.g) + ' <small>' + n + ' item' + (n > 1 ? "s" : "") + '</small></summary><div class="sbody">';
+        }
+        const input = f.type === "textarea"
+            ? '<textarea id="sf_' + f.k + '"></textarea>'
+            : '<input type="' + (f.type === "email" ? "email" : f.type === "url" ? "url" : "text") + '" id="sf_' + f.k + '">';
+        html += '<div class="sfield" id="sw_' + f.k + '"><div class="slabel"><label for="sf_' + f.k + '">' + esc(f.label) + '</label>' +
+            '<span class="edited-tag" hidden>edited</span>' +
+            '<button type="button" class="reset-btn" data-reset="' + f.k + '" title="Put back the original wording">&#8634; Original</button></div>' + input + "</div>";
+    });
+    if (group !== null) html += "</div></details>";
+    $("siteFields").innerHTML = html;
+})();
+
+function markEdited(k) {
+    const f = SITE_FIELDS.find(x => x.k === k);
+    const el = $("sf_" + k);
+    if (!f || !el) return;
+    const changed = el.value.trim() !== String(f.def).trim();
+    $("sw_" + k).classList.toggle("is-edited", changed);
+    $("sw_" + k).querySelector(".edited-tag").hidden = !changed;
+}
+$("siteFields").addEventListener("input", e => { if (e.target.id && e.target.id.indexOf("sf_") === 0) markEdited(e.target.id.slice(3)); });
+$("siteFields").addEventListener("click", e => {
+    const b = e.target.closest("[data-reset]");
+    if (!b) return;
+    const f = SITE_FIELDS.find(x => x.k === b.dataset.reset);
+    $("sf_" + f.k).value = f.def;
+    markEdited(f.k);
+    setMsg($("siteMsg"), "Original wording put back in one box. Press Save to apply it to the website.");
+});
+
+function loadSite() {
+    db.collection("settings").doc("site").get().then(doc => {
+        const saved = doc.exists ? doc.data() : {};
+        SITE_FIELDS.forEach(f => {
+            $("sf_" + f.k).value = (saved[f.k] !== undefined) ? saved[f.k] : f.def;
+            markEdited(f.k);
+        });
+    }).catch(() => setMsg($("siteMsg"), "Could not load the saved details.", true));
+}
+
+$("siteForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const data = {};
+    SITE_FIELDS.forEach(f => { data[f.k] = $("sf_" + f.k).value.trim(); });
+    if (data.mapsLink && data.mapsLink.indexOf("https://") !== 0) {
+        setMsg($("siteMsg"), "The map link must start with https://", true);
+        return;
+    }
+    setMsg($("siteMsg"), "Saving...");
+    db.collection("settings").doc("site").set(data)
+        .then(() => setMsg($("siteMsg"), "Saved. The website now shows these details."))
+        .catch(err => setMsg($("siteMsg"), err.code === "permission-denied" ? permissionHelp() : "Could not save. Please try again.", true));
+});
+</script>
+
+<script>
+/* look-and-feel only: greeting and quick buttons. Does not read or write any data. */
+(function () {
+    var h = new Date().getHours();
+    var g = h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening";
+    document.getElementById("greetText").textContent = g;
+    document.getElementById("todayText").textContent = new Date().toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+    function setAll(open) { document.querySelectorAll(".sgroup").forEach(function (d) { d.open = open; }); }
+    document.getElementById("expandAll").addEventListener("click", function () { setAll(true); });
+    document.getElementById("collapseAll").addEventListener("click", function () { setAll(false); });
+    document.querySelectorAll("[data-goto]").forEach(function (b) {
+        b.addEventListener("click", function () {
+            var t = document.querySelector('.tab[data-tab="' + b.dataset.goto + '"]');
+            if (t) { t.click(); t.scrollIntoView({ behavior: "smooth", block: "center" }); }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>

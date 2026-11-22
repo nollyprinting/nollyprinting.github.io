@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Nolly Printing & Embroidery | Golf Shirts, Caps, Bridal Gowns & Shawls</title>
+<meta name="description" content="Nolly Printing & Embroidery in Soshanguve: custom printed golf T-shirts and caps, bridal gowns and personalised wedding shawls.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Nolly Printing & Embroidery">
+<meta property="og:description" content="Custom golf T-shirts, caps, bridal gowns and wedding shawls. Order on WhatsApp.">
+<link rel="icon" type="image/jpeg" href="logo.jpeg">
+ 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+ 
+<style>
+:root {
+    --burgundy: #071a63;
+    --dark: #070707;
+    --gold: #e2b24c;
+    --cream: #f6f7fb;
+    --navcream: #070707;
+}
+ 
+* { margin: 0; padding: 0; box-sizing: border-box; }
+ 
+html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+ 
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: #17192b;
+    overflow-x: hidden;
+}
+ 
+/* ================= NAVIGATION ================= */
+ 
+header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: var(--navcream);
+    border-bottom: 2px solid var(--gold);
+    box-shadow: 0 5px 25px rgba(0,0,0,.08);
+    transition: .3s ease;
+}
+ 
+.navbar {
+    max-width: 1250px;
+    margin: auto;
+    padding: 8px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+ 
+.logo { text-decoration: none; }
+ 
+.logo img { height: 56px; width: auto; display: block; }
+ 
+.nav-links { display: flex; align-items: center; gap: 10px; list-style: none; }
+ 
+.nav-links a {
+    color: #e9edf4;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    position: relative;
+    padding: 12px 15px;
+    border-radius: 8px;
+    display: block;
+    transition: all .3s ease;
+}
+ 
+.nav-links a:hover {
+    color: var(--gold);
+    background: rgba(226,178,76,.13);
+    transform: translateY(-3px);
+}
+ 
+.nav-links a.active {
+    color: #070707;
+    background: var(--gold);
+    box-shadow: 0 5px 15px rgba(226,178,76,.25);
+}
+ 
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: var(--gold);
+    border-radius: 20px;
+    transform: translateX(-50%);
+    transition: width .3s ease;
+}
+ 
+.nav-links a:hover::after { width: 60%; }
+.nav-links a.active::after { width: 60%; background: #070707; }
+ 
+.menu-toggle {
+    display: none;
+    color: var(--gold);
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+ 
+/* ================= HERO ================= */
+ 
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 130px 20px 80px;
+    position: relative;
+    background: radial-gradient(ellipse at 50% 30%, #0c2a9a 0%, #071a63 45%, #070707 100%);
+    color: white;
+}
+ 
+.hero-content { max-width: 850px; animation: heroEnter 1s ease; }
+ 
+.hero-logo {
+    width: min(520px, 88%);
+    margin: 0 auto 30px;
+    display: block;
+    border-radius: 16px;
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 60px rgba(226,178,76,.35);
+}
+ 
+.hero-tag {
+    display: inline-block;
+    color: var(--gold);
+    letter-spacing: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 22px;
+}
+ 
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px,5vw,52px);
+    line-height: 1.2;
+    margin-bottom: 22px;
+    color: var(--gold);
+}
+ 
+.hero p {
+    max-width: 620px;
+    margin: auto;
+    color: #dbe3ff;
+    line-height: 1.8;
+    font-size: 17px;
+}
+ 
+.hero-buttons {
+    margin-top: 35px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+ 
+.btn {
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: .35s;
+}
+ 
+.btn-primary { background: var(--gold); color: var(--dark); }
+.btn-primary:hover { background: white; transform: translateY(-5px); box-shadow: 0 12px 30px rgba(226,178,76,.3); }
+.btn-outline { color: white; border: 1px solid white; }
+.btn-outline:hover { background: white; color: var(--dark); transform: translateY(-5px); }
+ 
+@keyframes heroEnter {
+    from { opacity: 0; transform: translateY(35px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+ 
+/* ================= GENERAL SECTIONS ================= */
+ 
+section:not(.hero) { padding: 100px 7%; }
+ 
+.container { max-width: 1200px; margin: auto; }
+ 
+.section-heading { text-align: center; margin-bottom: 55px; }
+ 
+.section-heading small {
+    color: var(--gold-dark, #a97c1f);
+    letter-spacing: 4px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+ 
+.section-heading h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(35px,5vw,55px);
+    margin-top: 12px;
+    color: var(--burgundy);
+}
+ 
+.section-heading p { color: #5a5f78; margin-top: 15px; }
+ 
+/* ================= ABOUT ================= */
+ 
+.about { background: white; }
+ 
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 60px;
+}
+ 
+.about-image {
+    overflow: hidden;
+    border-radius: 20px;
+    border: 3px solid var(--gold);
+    box-shadow: 20px 20px 0 #0c2a9a;
+}
+ 
+.about-image img { width: 100%; display: block; transition: .6s; }
+.about-image:hover img { transform: scale(1.04); }
+ 
+.about-text h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    color: var(--burgundy);
+    margin-bottom: 20px;
+}
+ 
+.about-text p { color: #50556d; line-height: 1.9; margin-bottom: 18px; }
+ 
+/* ================= SERVICES ================= */
+ 
+.services { background: #eaeffb; border-top: 1px solid #d5dcf0; }
+ 
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    gap: 25px;
+}
+ 
+.service-card {
+    background: white;
+    padding: 38px 28px;
+    border-radius: 18px;
+    border: 1px solid #dfe3f1;
+    transition: .4s;
+    position: relative;
+    overflow: hidden;
+}
+ 
+.service-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 0;
+    background: var(--gold);
+    transition: .4s;
+}
+ 
+.service-card:hover::before { height: 100%; }
+.service-card:hover { transform: translateY(-12px); box-shadow: 0 20px 40px rgba(7,26,99,.15); }
+ 
+.service-icon { font-size: 38px; margin-bottom: 22px; }
+.service-card h3 { color: var(--burgundy); font-size: 21px; margin-bottom: 13px; }
+.service-card p { color: #5a5f78; line-height: 1.8; font-size: 14px; }
+ 
+/* ================= GALLERY ================= */
+ 
+.gallery { background: white; border-top: 1px solid #d5dcf0; }
+ 
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 22px;
+}
+ 
+.gallery-item {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 3px solid var(--gold);
+    background: #070707;
+}
+ 
+.gallery-img { aspect-ratio: 3 / 2; overflow: hidden; background: linear-gradient(135deg,#0c2a9a,#071a63); }
+ 
+.gallery-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transition: transform .6s;
+}
+ 
+.gallery-item:hover .gallery-img img { transform: scale(1.04); }
+ 
+.gallery-item figcaption {
+    padding: 18px 16px 20px;
+    text-align: center;
+    background: #070707;
+    border-top: 2px solid var(--gold);
+}
+ 
+.gallery-item figcaption h3 {
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-size: 21px;
+    margin-bottom: 8px;
+}
+ 
+.gallery-item figcaption p {
+    color: #dbe3ff;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 14px;
+}
+ 
+.gallery-item figcaption a {
+    display: inline-block;
+    padding: 10px 22px;
+    border-radius: 30px;
+    background: var(--gold);
+    color: #070707;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: .3s;
+}
+ 
+.gallery-item figcaption a:hover { background: white; }
+ 
+.gallery-note { text-align: center; color: #5a5f78; margin-top: 22px; font-size: 14px; }
+ 
+/* ================= CONTACT ================= */
+ 
+.contact {
+    position: relative;
+    overflow: hidden;
+    border-top: 5px solid var(--gold);
+    box-shadow: inset 0 40px 60px -40px rgba(0,0,0,.6);
+    background: linear-gradient(135deg,#070707,#071a63,#070707);
+    color: white;
+}
+ 
+.contact::before {
+    content: "NOLLY";
+    position: absolute;
+    right: -20px;
+    bottom: 0;
+    font-size: clamp(120px,22vw,280px);
+    font-weight: 900;
+    color: rgba(255,255,255,.03);
+    pointer-events: none;
+}
+ 
+.contact .container { position: relative; z-index: 1; }
+.contact .section-heading h2 { color: var(--gold); }
+.contact .section-heading p { color: #cdd6ff; }
+ 
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 22px;
+}
+ 
+.contact-box {
+    padding: 35px 25px;
+    border: 1px solid rgba(226,178,76,.4);
+    border-radius: 18px;
+    background: rgba(255,255,255,.06);
+    backdrop-filter: blur(12px);
+    transition: .4s;
+}
+ 
+.contact-box:hover {
+    transform: translateY(-12px);
+    background: rgba(255,255,255,.11);
+    border-color: var(--gold);
+    box-shadow: 0 20px 45px rgba(0,0,0,.3);
+}
+ 
+.contact-box h3 { color: var(--gold); font-size: 21px; margin-bottom: 18px; }
+.contact-box p { color: #eef1ff; line-height: 1.9; font-size: 15px; }
+.contact-box a { color: inherit; text-decoration: none; transition: .3s; }
+.contact-box a:hover { color: var(--gold); }
+ 
+/* ================= FOOTER ================= */
+ 
+footer {
+    background: #070707;
+    color: #c9cde0;
+    padding: 35px 20px;
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 1px;
+    border-top: 2px solid var(--gold);
+}
+ 
+footer span { color: var(--gold); font-weight: bold; }
+ 
+/* ================= WHATSAPP ================= */
+ 
+.whatsapp {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 23px;
+    border-radius: 50px;
+    background: #20c76a;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 8px 25px rgba(32,199,106,.35);
+    transition: .3s;
+    animation: float 3s ease-in-out infinite;
+}
+ 
+.whatsapp:hover { transform: scale(1.1); background: #16a75a; }
+ 
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
+}
+ 
+/* ================= SCROLL ANIMATIONS ================= */
+ 
+.reveal { opacity: 0; transform: translateY(35px); transition: opacity .8s ease, transform .8s ease; }
+.reveal.show { opacity: 1; transform: translateY(0); }
+ 
+/* ================= LATTICE (decoration) ================= */
+ 
+.hero::before, .contact::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(45deg, rgba(226,178,76,.10) 0, rgba(226,178,76,.10) 1px, transparent 1px, transparent 30px), repeating-linear-gradient(-45deg, rgba(226,178,76,.10) 0, rgba(226,178,76,.10) 1px, transparent 1px, transparent 30px);
+    pointer-events: none;
+}
+ 
+.hero-content { position: relative; z-index: 1; }
+ 
+.section-heading h2::after {
+    content: "◆";
+    display: block;
+    margin-top: 12px;
+    font-size: 14px;
+    letter-spacing: 10px;
+    color: var(--gold);
+}
+ 
+/* ================= ANIMATIONS ================= */
+ 
+/* keep animated pieces inside their sections so the page never scrolls sideways */
+.hero, .about, .services, .gallery { overflow: hidden; }
+html, body { overflow-x: clip; }
+ 
+/* hero logo: gentle float + glow */
+.hero-logo { animation: logoFloat 5s ease-in-out infinite, logoGlow 3.5s ease-in-out infinite; }
+@keyframes logoFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes logoGlow {
+    0%,100% { box-shadow: 0 0 40px rgba(226,178,76,.25); }
+    50% { box-shadow: 0 0 85px rgba(226,178,76,.6); }
+}
+ 
+/* hero headline: slow gold shimmer */
+.hero h1 {
+    background: linear-gradient(100deg, #c9962e 0%, #ffe9a8 25%, #e2b24c 50%, #ffe9a8 75%, #c9962e 100%);
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: shimmer 6s linear infinite;
+}
+@keyframes shimmer { from { background-position: 0% 0; } to { background-position: -250% 0; } }
+ 
+/* floating gold sparkles in hero */
+.sparkle {
+    position: absolute;
+    bottom: -20px;
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    opacity: 0;
+    box-shadow: 0 0 12px 3px rgba(226,178,76,.7);
+    animation: rise 9s linear infinite;
+    pointer-events: none;
+}
+.sparkle:nth-of-type(1) { left: 8%;  animation-delay: 0s;   }
+.sparkle:nth-of-type(2) { left: 22%; animation-delay: 2.5s; width: 5px; height: 5px; }
+.sparkle:nth-of-type(3) { left: 40%; animation-delay: 5s;   }
+.sparkle:nth-of-type(4) { left: 60%; animation-delay: 1.2s; width: 6px; height: 6px; }
+.sparkle:nth-of-type(5) { left: 78%; animation-delay: 3.8s; }
+.sparkle:nth-of-type(6) { left: 92%; animation-delay: 6.5s; width: 5px; height: 5px; }
+@keyframes rise {
+    0% { transform: translateY(0) scale(.6); opacity: 0; }
+    15% { opacity: .9; }
+    100% { transform: translateY(-95vh) scale(1.2); opacity: 0; }
+}
+ 
+/* About: image slides in from the left, text from the right */
+.about-image.reveal { transform: translateX(-60px); }
+.about-text.reveal { transform: translateX(60px); }
+.about-image.reveal.show, .about-text.reveal.show { transform: none; }
+ 
+/* button shine sweep */
+.btn-primary, .gallery-item figcaption a { position: relative; overflow: hidden; }
+.btn-primary::after, .gallery-item figcaption a::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,.65), transparent);
+    transform: skewX(-20deg);
+}
+.btn-primary:hover::after, .gallery-item figcaption a:hover::after { left: 130%; transition: left .7s ease; }
+ 
+/* service icons bounce on card hover */
+.service-card:hover .service-icon { animation: bounce .6s ease; }
+@keyframes bounce { 0%,100% { transform: translateY(0); } 40% { transform: translateY(-12px); } 70% { transform: translateY(-4px); } }
+ 
+/* gold diamond under headings pulses */
+.section-heading h2::after { animation: pulse 2.4s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { opacity: .5; transform: scale(1); } 50% { opacity: 1; transform: scale(1.35); } }
+ 
+/* ================= ORDER FORM ================= */
+ 
+.nav-right { display: flex; align-items: center; gap: 10px; }
+.admin-btn {
+    position: relative; isolation: isolate;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 5px 16px 5px 5px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #0b1650, #050a30);
+    color: #ffe9a8;
+    font-weight: 800; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+    text-decoration: none; white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(0,0,0,.45), inset 0 0 12px rgba(226,178,76,.12);
+    transition: transform .25s ease, box-shadow .25s ease, color .25s ease;
+}
+/* slowly moving gold ring around the button */
+.admin-btn::before {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 2px;
+    background: linear-gradient(110deg, #b8862b, #fff3c4, #e2b24c, #b8862b);
+    background-size: 300% 100%;
+    animation: adminBorder 4s linear infinite;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    pointer-events: none;
+}
+.admin-ico {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: grid; place-items: center; flex-shrink: 0;
+    background: linear-gradient(135deg, #f7d77a, #e2b24c 55%, #b8862b);
+    color: #071a63;
+    animation: adminPing 2.6s ease-out infinite;
+}
+.admin-btn:hover { transform: translateY(-2px); color: #fff; box-shadow: 0 0 18px rgba(226,178,76,.55), 0 6px 16px rgba(0,0,0,.4); }
+.admin-btn:active { transform: scale(.97); }
+@keyframes adminBorder { to { background-position: -300% 0; } }
+@keyframes adminPing {
+    0% { box-shadow: 0 0 0 0 rgba(226,178,76,.55); }
+    70%, 100% { box-shadow: 0 0 0 9px rgba(226,178,76,0); }
+}
+ 
+.login-dialog {
+    margin: auto;
+    border: 2px solid var(--gold);
+    border-radius: 18px;
+    padding: 0;
+    width: min(420px, 92vw);
+    background: #070707;
+    color: white;
+    overflow: visible;
+}
+.login-dialog::backdrop { background: rgba(3,8,30,.75); backdrop-filter: blur(4px); }
+ 
+.login-form { position: relative; padding: 34px 28px 28px; display: flex; flex-direction: column; gap: 8px; text-align: left; }
+.login-form h2 { font-family: 'Playfair Display', serif; color: var(--gold); text-align: center; font-size: 28px; margin-bottom: 8px; }
+.login-form label { font-size: 13px; font-weight: 700; color: #dbe3ff; margin-top: 6px; display: block; }
+.login-form input {
+    font-family: inherit;
+    font-size: 16px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(226,178,76,.5);
+    background: rgba(255,255,255,.07);
+    color: white;
+    width: 100%;
+}
+.login-form input:focus, .login-form select:focus, .login-form textarea:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
+.login-submit { margin-top: 16px; border: none; cursor: pointer; font-size: 16px; font-family: inherit; }
+.login-status { min-height: 20px; font-size: 13px; line-height: 1.5; color: #ffe9a8; text-align: center; margin-top: 6px; }
+.login-close { position: absolute; top: 10px; right: 12px; background: none; border: none; color: var(--gold); font-size: 20px; cursor: pointer; padding: 6px; }
+ 
+.order-dialog { max-height: 92vh; overflow-y: auto; }
+.order-dialog select, .order-dialog textarea {
+    font-family: inherit;
+    font-size: 16px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(226,178,76,.5);
+    background: #14183a;
+    color: white;
+    width: 100%;
+}
+.order-dialog textarea { min-height: 80px; resize: vertical; }
+.size-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 6px; }
+.size-grid div { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: #dbe3ff; font-weight: 700; }
+.size-grid input { padding: 8px; text-align: center; }
+ 
+/* ================= ANNOUNCEMENT ================= */
+ 
+[hidden] { display: none !important; }
+.announcement { background: var(--gold); color: #070707; text-align: center; font-weight: 700; font-size: 14px; padding: 8px 14px; }
+ 
+/* ================= CONTACT BUTTONS ================= */
+ 
+.box-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+.contact-box .mini-btn {
+    display: inline-block;
+    padding: 9px 18px;
+    border-radius: 30px;
+    background: var(--gold);
+    color: #070707;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: .3s;
+}
+.contact-box .mini-btn:hover { background: white; color: #070707; transform: translateY(-2px); }
+.contact-box .mini-wa { background: #20c76a; color: white; }
+.contact-box .mini-wa:hover { background: #16a75a; color: white; }
+ 
+/* ================= MOBILE ================= */
+ 
+@media(max-width:850px) {
+    .menu-toggle { display: block; }
+ 
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--navcream);
+        box-shadow: 0 12px 20px rgba(0,0,0,.2);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 15px 5% 25px;
+        gap: 5px;
+        display: none;
+    }
+ 
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: 15px; }
+    .nav-links a::after { left: 15px; transform: none; bottom: 5px; }
+    .about-content { grid-template-columns: 1fr; }
+    }
+ 
+@media(max-width:550px) {
+    .admin-btn { padding: 4px 12px 4px 4px; font-size: 11px; letter-spacing: 1px; gap: 6px; }
+    .admin-ico { width: 26px; height: 26px; }
+    section:not(.hero) { padding: 75px 6%; }
+    .logo img { height: 48px; }
+    .hero p { font-size: 15px; }
+    .whatsapp { right: 15px; bottom: 15px; }
+}
+ 
+/* ================= PHONE & TABLET FIXES ================= */
+
+html { -webkit-text-size-adjust: 100%; }
+img { max-width: 100%; }
+.contact-box p, .contact-box a { overflow-wrap: anywhere; }
+
+/* touch screens: no hover lift that stays "stuck" after a tap */
+@media (hover: none) {
+    .service-card:hover, .contact-box:hover, .btn-primary:hover, .btn-outline:hover,
+    .admin-btn:hover, .whatsapp:hover, .nav-links a:hover, .contact-box .mini-btn:hover { transform: none; }
+    .gallery-item:hover .gallery-img img, .about-image:hover img { transform: none; }
+}
+
+/* tablets and phones */
+@media(max-width:850px) {
+    section:not(.hero) { padding: 80px 6%; }
+    .about-content { gap: 32px; }
+    .about-image { box-shadow: 10px 10px 0 #0c2a9a; }
+    .about-text h3 { font-size: 28px; }
+    .menu-toggle { padding: 6px 10px; font-size: 30px; line-height: 1; }
+    .nav-right { gap: 6px; }
+
+    /* gallery pictures show in full, no blue bands above and below */
+    .gallery-item { display: flex; flex-direction: column; }
+    .gallery-item figcaption { flex: 1; }
+    .gallery-img { aspect-ratio: auto; background: #070707; }
+    .gallery-img img { height: auto; display: block; object-fit: fill; }
+}
+
+/* phones */
+@media(max-width:550px) {
+    section:not(.hero) { padding: 60px 6%; }
+    .section-heading { margin-bottom: 34px; }
+    .section-heading h2 { font-size: 32px; }
+
+    .hero { padding: 100px 18px 60px; min-height: auto; }
+    .hero-logo { width: 92%; margin-bottom: 22px; animation: logoFloat 5s ease-in-out infinite; }
+    .hero-tag { letter-spacing: 2px; font-size: 11px; margin-bottom: 16px; }
+    .hero h1 { font-size: 27px; animation: none; }
+    .hero-buttons { flex-direction: column; align-items: center; gap: 12px; margin-top: 28px; }
+    .hero-buttons .btn { width: 100%; max-width: 300px; text-align: center; padding: 15px 20px; }
+    .sparkle { display: none; }
+
+    .about-text h3 { font-size: 25px; }
+    .gallery-grid { gap: 18px; }
+    .gallery-item figcaption { padding: 16px 14px 18px; }
+    .gallery-item figcaption h3 { font-size: 19px; }
+    .gallery-item figcaption a { padding: 12px 24px; font-size: 14px; }
+
+    .service-card { padding: 24px 22px; }
+    .service-icon { font-size: 32px; margin-bottom: 12px; }
+    .service-card h3 { font-size: 19px; margin-bottom: 8px; }
+
+    .contact-box { padding: 26px 20px; }
+    .contact-box .mini-btn { padding: 12px 20px; font-size: 14px; }
+    .announcement { font-size: 13px; }
+    footer { padding: 28px 16px 90px; font-size: 13px; }
+
+    .login-form { padding: 28px 20px 22px; }
+    .order-dialog { max-height: 90vh; max-height: 90dvh; }
+
+    /* smaller chat button, kept clear of the phone's bottom bar */
+    .whatsapp { right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); padding: 9px 15px; font-size: 13px; gap: 6px; box-shadow: 0 4px 14px rgba(32,199,106,.35); }
+}
+
+/* phone backgrounds: smaller pattern, gradient sized to the screen (nothing looks zoomed in) */
+@media(max-width:550px) {
+    .hero { background: radial-gradient(circle at 50% 22%, #0c2a9a 0%, #071a63 55%, #050a30 100%); }
+    .hero::before, .contact::after {
+        background-image:
+            repeating-linear-gradient(45deg, rgba(226,178,76,.07) 0, rgba(226,178,76,.07) 1px, transparent 1px, transparent 20px),
+            repeating-linear-gradient(-45deg, rgba(226,178,76,.07) 0, rgba(226,178,76,.07) 1px, transparent 1px, transparent 20px);
+    }
+    .contact { background: linear-gradient(165deg, #070707, #071a63 55%, #070707); }
+    .contact::before { font-size: 84px; right: -6px; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    .admin-btn::before, .admin-ico { animation: none; }
+    .sparkle { display: none; }
+    .hero h1 { animation: none; }
+    .hero-logo { animation: none; }
+    *,*::before,*::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+</style>
+</head>
+ 
+<body>
+ 
+<!-- NAVIGATION -->
+<header id="header">
+<nav class="navbar">
+ 
+<a href="#home" class="logo"><img src="logo.jpeg" alt="Nolly Printing & Embroidery logo"></a>
+ 
+<ul class="nav-links" id="navLinks">
+<li><a href="#home" class="active">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#services">Services</a></li>
+<li><a href="#gallery">Gallery</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+ 
+<div class="nav-right">
+<a href="admin.html" class="admin-btn" title="Admin Login" aria-label="Admin Login"><span class="admin-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z"/><path d="M9.5 12l2 2 3.5-4"/></svg></span><span class="admin-text">Admin</span></a>
+<button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+</div>
+ 
+</nav>
+<div class="announcement" id="announcement" hidden></div>
+</header>
+ 
+<!-- HERO -->
+<section class="hero" id="home">
+<span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span>
+<div class="hero-content">
+ 
+<img class="hero-logo" src="logo.jpeg" alt="Nolly Printing & Embroidery logo with golden crown">
+ 
+<span id="heroTag" class="hero-tag">PRINTING • EMBROIDERY • BRIDAL</span>
+ 
+<h1 id="heroTitle">Custom printing and embroidery for your team, your brand and your big day.</h1>
+ 
+<p id="heroText">Golf T-shirts, caps, bridal gowns and personalised wedding shawls, made in Soshanguve.</p>
+ 
+<div class="hero-buttons">
+<a href="#services" class="btn btn-primary">Explore Our Services</a>
+<a href="#contact" class="btn btn-outline">Get In Touch</a>
+</div>
+ 
+</div>
+</section>
+ 
+<!-- ABOUT -->
+<section class="about" id="about">
+<div class="container">
+ 
+<div class="section-heading reveal">
+<small>Who We Are</small>
+<h2 id="aboutTitle">About Nolly Printing & Embroidery</h2>
+<p id="aboutSub">Creativity, quality and attention to detail.</p>
+</div>
+ 
+<div class="about-content">
+ 
+<div class="about-image reveal">
+<img loading="lazy" decoding="async" src="gold.jpeg" alt="Nolly Printing & Embroidery advertisement showing golf shirts, caps, wedding shawls and a bridal robe">
+</div>
+ 
+<div class="about-text reveal">
+<h3 id="aboutHeading">More Than Just Printing.</h3>
+ 
+<p id="aboutP1">At Nolly Printing & Embroidery, we print and embroider golf T-shirts and caps with your own logo, and we make bridal gowns, robes and wedding shawls with your name and surname.</p>
+ 
+<p id="aboutP2">Whether it is a company team, a golf day or a wedding, we take care of every detail so your order arrives looking exactly the way you pictured it.</p>
+ 
+<p id="aboutP3">We focus on making every order special, because your brand deserves to stand out.</p>
+ 
+<a href="#contact" class="btn btn-primary">Work With Us</a>
+</div>
+ 
+</div>
+</div>
+</section>
+ 
+<!-- SERVICES -->
+<section class="services" id="services">
+<div class="container">
+ 
+<div class="section-heading reveal">
+<small>What We Do</small>
+<h2 id="servicesTitle">Our Services</h2>
+<p id="servicesSub">Printing and embroidery for businesses, teams and weddings.</p>
+</div>
+ 
+<div class="services-grid">
+ 
+<div class="service-card reveal">
+<div class="service-icon">👕</div>
+<h3 id="svc1Title">Golf T-shirts</h3>
+<p id="svc1Text">Printed golf T-shirts with your logo on the chest.</p>
+</div>
+ 
+<div class="service-card reveal">
+<div class="service-icon">🧢</div>
+<h3 id="svc2Title">Caps</h3>
+<p id="svc2Text">Embroidered and printed caps with your logo.</p>
+</div>
+ 
+<div class="service-card reveal">
+<div class="service-icon">👰</div>
+<h3 id="svc3Title">Bridal Gowns and Robes</h3>
+<p id="svc3Text">Satin bridal robes and gowns embroidered with your wording.</p>
+</div>
+ 
+<div class="service-card reveal">
+<div class="service-icon">🧵</div>
+<h3 id="svc4Title">Wedding Shawls</h3>
+<p id="svc4Text">White shawls embroidered with your name and surname.</p>
+</div>
+ 
+</div>
+</div>
+</section>
+ 
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+<div class="container">
+ 
+<div class="section-heading reveal">
+<small>Our Creativity</small>
+<h2 id="galleryTitle">Our Gallery</h2>
+<p id="galleryIntro">A glimpse into the world of Nolly.</p>
+</div>
+ 
+<div class="gallery-grid" id="galleryGrid">
+ 
+<figure class="gallery-item reveal">
+<div class="gallery-img"><img loading="lazy" decoding="async" src="shirts.jpeg" alt="Blue and white golf T-shirts with space for your logo"></div>
+<figcaption>
+<h3>Golf T-shirts</h3>
+<p>Blue or white polos with your company or club logo printed on the chest.</p>
+<a href="#contact" data-order="golf">Add your logo</a>
+</figcaption>
+</figure>
+ 
+<figure class="gallery-item reveal">
+<div class="gallery-img"><img loading="lazy" decoding="async" src="caps.jpeg" alt="Blue and white caps with space for your logo"></div>
+<figcaption>
+<h3>Caps</h3>
+<p>Matching caps with your logo printed or embroidered on the front.</p>
+<a href="#contact" data-order="caps">Add your logo</a>
+</figcaption>
+</figure>
+ 
+<figure class="gallery-item reveal">
+<div class="gallery-img"><img loading="lazy" decoding="async" src="shawls-ad.jpeg" alt="Five white wedding shawls with embroidered names"></div>
+<figcaption>
+<h3>Wedding Shawls</h3>
+<p>White shawls embroidered with your name and surname, in your choice of colour and design.</p>
+<a href="#contact" data-order="shawls">Add your name</a>
+</figcaption>
+</figure>
+ 
+<figure class="gallery-item reveal">
+<div class="gallery-img"><img loading="lazy" decoding="async" src="white.jpeg" alt="Nolly Printing & Embroidery full product advertisement"></div>
+<figcaption>
+<h3>Bridal Gowns and Robes</h3>
+<p>Satin bridal robes and gowns embroidered with "Bride" or your own wording.</p>
+<a href="#contact" data-order="bridal">Customise yours</a>
+</figcaption>
+</figure>
+ 
+</div>
+ 
+<p class="gallery-note" id="galleryNote">Designs shown (such as "Your Logo Here" and "Becoming Mrs Setati") are samples. Fill in the order form and send us your logo or name on WhatsApp and we will customise it for you.</p>
+ 
+</div>
+</section>
+ 
+<!-- CONTACT -->
+<section class="contact" id="contact">
+<div class="container">
+ 
+<div class="section-heading reveal">
+<small>Let's Connect</small>
+<h2 id="contactTitle">Place Your Order</h2>
+<p id="contactIntro">Send us a WhatsApp message or call to get started.</p>
+</div>
+ 
+<div class="contact-grid">
+ 
+<div class="contact-box reveal">
+<h3>🛒 Start your order</h3>
+<p>Choose what you want to order:</p>
+<div class="box-actions">
+<a class="mini-btn" href="#contact" data-order="golf">Golf T-shirts</a>
+<a class="mini-btn" href="#contact" data-order="caps">Caps</a>
+<a class="mini-btn" href="#contact" data-order="shawls">Wedding Shawls</a>
+<a class="mini-btn" href="#contact" data-order="bridal">Bridal</a>
+</div>
+</div>
+ 
+<div class="contact-box reveal" id="boxPhones">
+<h3>☎ Call or WhatsApp</h3>
+<p>072 655 1662</p>
+<div class="box-actions">
+<a class="mini-btn" href="tel:+27726551662">Call</a>
+<a class="mini-btn mini-wa" href="https://wa.me/27726551662?text=Hi%20Nolly%2C%20I%20would%20like%20to%20place%20an%20order." target="_blank" rel="noopener noreferrer">WhatsApp</a>
+</div>
+<p style="margin-top:20px">071 367 1096</p>
+<div class="box-actions">
+<a class="mini-btn" href="tel:+27713671096">Call</a>
+<a class="mini-btn mini-wa" href="https://wa.me/27713671096?text=Hi%20Nolly%2C%20I%20would%20like%20to%20place%20an%20order." target="_blank" rel="noopener noreferrer">WhatsApp</a>
+</div>
+</div>
+ 
+<div class="contact-box reveal" id="boxEmail">
+<h3>✉ Email</h3>
+<p>rose007@gmail.com</p>
+<div class="box-actions">
+<a class="mini-btn" href="mailto:rose007@gmail.com?subject=Order%20enquiry%20from%20the%20website">Send an email</a>
+</div>
+</div>
+ 
+<div class="contact-box reveal" id="boxLocation">
+<h3>⌖ Location</h3>
+<p>Mollo Street<br>Block VV 7372/20<br>Soshanguve 0152</p>
+<div class="box-actions">
+<a class="mini-btn" href="https://maps.app.goo.gl/2btHksqiE79HpRJj7" target="_blank" rel="noopener noreferrer">Get directions</a>
+</div>
+</div>
+ 
+<div class="contact-box reveal" id="boxHours">
+<h3>◷ Operating Hours</h3>
+<p>Open 24/7</p>
+<p>Orders ready from 5 business days minimum.</p>
+</div>
+ 
+</div>
+ 
+</div>
+</section>
+ 
+<!-- FOOTER -->
+<footer>
+<img src="logo.jpeg" alt="Nolly Printing & Embroidery logo" style="height:60px;margin:0 auto 14px;display:block;">
+© 2026 <span>Nolly Printing & Embroidery.</span> All Rights Reserved.
+<p id="footerContact" style="margin-top:8px;font-size:12px;">Mollo Street, Block VV 7372/20, Soshanguve 0152 · 072 655 1662 · 071 367 1096</p>
+<p id="footerTagline" style="margin-top:8px;font-size:12px;">Creativity in every print. Excellence in every stitch.</p>
+</footer>
+ 
+<!-- ORDER FORM -->
+<dialog id="orderDialog" class="login-dialog order-dialog" aria-labelledby="orderTitle">
+<form id="orderForm" class="login-form" novalidate>
+<button type="button" class="login-close" id="orderClose" aria-label="Close">✕</button>
+<h2 id="orderTitle">Place your order</h2>
+<label for="custName">Your name</label>
+<input type="text" id="custName" placeholder="Your name" autocomplete="name" required>
+<label for="custPhone">Your WhatsApp number (optional)</label>
+<input type="tel" id="custPhone" placeholder="e.g. 072 000 0000" autocomplete="tel">
+<div id="orderFields"></div>
+<button type="submit" class="btn btn-primary login-submit">Send order on WhatsApp</button>
+<p class="login-status" id="orderStatus" role="status" aria-live="polite"></p>
+</form>
+</dialog>
+ 
+<!-- WHATSAPP -->
+<a href="https://wa.me/27726551662" class="whatsapp" target="_blank" rel="noopener noreferrer">☏ Let's Chat</a>
+ 
+<script src="firebase-config.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+ 
+<script>
+ 
+/* MOBILE MENU */
+const menuToggle = document.getElementById("menuToggle");
+const navLinksContainer = document.getElementById("navLinks");
+ 
+menuToggle.addEventListener("click", () => {
+    navLinksContainer.classList.toggle("open");
+    const isOpen = navLinksContainer.classList.contains("open");
+    menuToggle.setAttribute("aria-expanded", isOpen);
+    menuToggle.textContent = isOpen ? "✕" : "☰";
+});
+ 
+/* CLOSE MENU AFTER CLICK */
+document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+        navLinksContainer.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.textContent = "☰";
+    });
+});
+ 
+/* ACTIVE NAVIGATION */
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll(".nav-links a");
+ 
+const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const currentId = entry.target.id;
+            navLinks.forEach(link => {
+                link.classList.toggle("active", link.getAttribute("href") === "#" + currentId);
+            });
+        }
+    });
+}, { rootMargin: "-25% 0px -60% 0px", threshold: 0 });
+ 
+sections.forEach(section => sectionObserver.observe(section));
+ 
+/* SCROLL ANIMATIONS */
+const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const el = entry.target;
+            el.classList.add("show");
+            revealObserver.unobserve(el);
+            /* after the entrance finishes, hand control back to normal hover effects */
+            setTimeout(() => {
+                el.classList.remove("reveal", "show");
+                el.style.transitionDelay = "";
+            }, 1600);
+        }
+    });
+}, { threshold: 0.12 });
+ 
+/* STAGGER: items in the same grid appear one after another */
+document.querySelectorAll(".services-grid, .gallery-grid, .contact-grid").forEach(grid => {
+    [...grid.children].forEach((child, i) => { child.style.transitionDelay = (i * 0.15) + "s"; });
+});
+ 
+document.querySelectorAll(".reveal").forEach(element => revealObserver.observe(element));
+ 
+/* HEADER SHADOW */
+window.addEventListener("scroll", () => {
+    const header = document.getElementById("header");
+    header.style.boxShadow = window.scrollY > 50
+        ? "0 8px 30px rgba(0,0,0,.4)"
+        : "0 5px 25px rgba(0,0,0,.08)";
+});
+ 
+/* INITIAL ACTIVE TAB */
+function setInitialActive() {
+    const current = location.hash || "#home";
+    navLinks.forEach(link => {
+        link.classList.toggle("active", link.getAttribute("href") === current);
+    });
+}
+ 
+window.addEventListener("load", setInitialActive);
+ 
+/* ================= ORDER FORM ================= */
+ 
+/* Orders are sent to this WhatsApp number (country code 27, no leading 0, no spaces).
+   The admin page can change it under "Site details". */
+let WA_NUMBER = "27726551662";
+ 
+/* connected to the cloud database when firebase-config.js is filled in */
+let nollyDb = null;
+ 
+const COLOURS = ["Black","White","Navy blue","Royal blue","Red","Gold","Silver","Pink","Green","Other (write in notes)"];
+const SIZES = ["S","M","L","XL","2XL","3XL"];
+ 
+const ORDER_ITEMS = {
+    golf: { title: "Golf T-shirts", fields: [
+        { id: "Shirt colour", type: "select", options: ["Blue","White","Other (write in notes)"] },
+        { id: "Sizes and quantities", type: "sizes" },
+        { id: "Text or logo wording", type: "text" },
+        { id: "Print colour", type: "select", options: COLOURS },
+        { id: "Notes", type: "textarea" } ] },
+    caps: { title: "Caps", fields: [
+        { id: "Cap colour", type: "select", options: ["Blue","White","Black","Other (write in notes)"] },
+        { id: "Quantity", type: "number" },
+        { id: "Print or embroidery", type: "select", options: ["Print","Embroidery","Not sure"] },
+        { id: "Text or logo wording", type: "text" },
+        { id: "Logo colour", type: "select", options: COLOURS },
+        { id: "Notes", type: "textarea" } ] },
+    shawls: { title: "Wedding Shawls", fields: [
+        { id: "Quantity", type: "number" },
+        { id: "Names to embroider", type: "text" },
+        { id: "Embroidery colour", type: "select", options: COLOURS },
+        { id: "Design or font wanted", type: "text" },
+        { id: "Notes", type: "textarea" } ] },
+    bridal: { title: "Bridal Gowns and Robes", fields: [
+        { id: "Item", type: "select", options: ["Robe","Gown","Both"] },
+        { id: "Size", type: "select", options: SIZES },
+        { id: "Quantity", type: "number" },
+        { id: "Wording (e.g. Bride)", type: "text" },
+        { id: "Garment colour", type: "select", options: COLOURS },
+        { id: "Embroidery colour", type: "select", options: COLOURS },
+        { id: "Notes", type: "textarea" } ] },
+    general: { title: "Custom order", fields: [
+        { id: "Quantity", type: "number" },
+        { id: "Size (if it applies)", type: "text" },
+        { id: "Colour wanted", type: "select", options: COLOURS },
+        { id: "Text or logo wording", type: "text" },
+        { id: "Notes", type: "textarea" } ] }
+};
+ 
+const orderDialog = document.getElementById("orderDialog");
+const orderForm = document.getElementById("orderForm");
+const orderFields = document.getElementById("orderFields");
+const orderStatus = document.getElementById("orderStatus");
+let currentItem = null;
+ 
+function buildFields(item) {
+    orderFields.innerHTML = "";
+    item.fields.forEach((f, i) => {
+        const wrap = document.createElement("div");
+        const id = "of" + i;
+ 
+        if (f.type === "sizes") {
+            const lab = document.createElement("label");
+            lab.textContent = f.id + " (how many of each)";
+            wrap.appendChild(lab);
+            const grid = document.createElement("div");
+            grid.className = "size-grid";
+            SIZES.forEach(sz => {
+                const cell = document.createElement("div");
+                cell.innerHTML = sz + '<input type="number" min="0" data-size="' + sz + '" placeholder="0" inputmode="numeric">';
+                grid.appendChild(cell);
+            });
+            wrap.appendChild(grid);
+        } else {
+            const lab = document.createElement("label");
+            lab.htmlFor = id;
+            lab.textContent = f.id;
+            wrap.appendChild(lab);
+ 
+            let input;
+            if (f.type === "select") {
+                input = document.createElement("select");
+                input.innerHTML = '<option value="">Choose...</option>' + f.options.map(o => "<option>" + o + "</option>").join("");
+            } else if (f.type === "textarea") {
+                input = document.createElement("textarea");
+            } else {
+                input = document.createElement("input");
+                input.type = f.type;
+                if (f.type === "number") { input.min = 1; input.inputMode = "numeric"; }
+            }
+            input.id = id;
+            input.dataset.label = f.id;
+            wrap.appendChild(input);
+        }
+        orderFields.appendChild(wrap);
+    });
+}
+ 
+/* one listener handles every order button, including gallery items added from the admin page */
+document.addEventListener("click", e => {
+    const btn = e.target.closest("[data-order]");
+    if (!btn) return;
+    e.preventDefault();
+    const base = ORDER_ITEMS[btn.dataset.order] || ORDER_ITEMS.general;
+    currentItem = { title: btn.dataset.title || base.title, fields: base.fields };
+    document.getElementById("orderTitle").textContent = currentItem.title;
+    buildFields(currentItem);
+    orderStatus.textContent = "";
+    orderDialog.showModal();
+});
+ 
+document.getElementById("orderClose").addEventListener("click", () => orderDialog.close());
+ 
+/* click on the dark backdrop closes it */
+orderDialog.addEventListener("click", e => { if (e.target === orderDialog) orderDialog.close(); });
+ 
+orderForm.addEventListener("submit", e => {
+    e.preventDefault();
+ 
+    const name = document.getElementById("custName").value.trim();
+    const phone = document.getElementById("custPhone").value.trim();
+    if (!name) {
+        orderStatus.textContent = "Please enter your name.";
+        return;
+    }
+ 
+    const details = {};
+    const lines = ["*New order: " + currentItem.title + "*", "Name: " + name];
+    if (phone) lines.push("Phone: " + phone);
+ 
+    orderFields.querySelectorAll("[data-label]").forEach(el => {
+        const value = el.value.trim();
+        if (value) {
+            details[el.dataset.label] = value;
+            lines.push(el.dataset.label + ": " + value);
+        }
+    });
+ 
+    const sizeParts = [];
+    orderFields.querySelectorAll("[data-size]").forEach(el => {
+        if (Number(el.value) > 0) sizeParts.push(el.dataset.size + " x " + el.value);
+    });
+    if (sizeParts.length) {
+        details["Sizes"] = sizeParts.join(", ");
+        lines.push("Sizes: " + sizeParts.join(", "));
+    }
+ 
+    lines.push("", "I will send my logo or design in this chat.");
+ 
+    /* also save the order for the admin page */
+    if (nollyDb) {
+        nollyDb.collection("orders").add({
+            name: name,
+            phone: phone,
+            item: currentItem.title,
+            details: details,
+            status: "New",
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        }).catch(() => {});
+    }
+ 
+    window.open("https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(lines.join("\n")), "_blank");
+    orderDialog.close();
+    orderForm.reset();
+});
+ 
+/* ================= EDITABLE CONTENT (from the admin page) ================= */
+ 
+function esc(str) {
+    return String(str == null ? "" : str).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+ 
+function toIntl(n) {
+    let d = String(n || "").replace(/\D/g, "");
+    if (d.startsWith("0")) d = "27" + d.slice(1);
+    return d;
+}
+ 
+function applySettings(s) {
+    const setText = (id, v) => { const el = document.getElementById(id); if (el && v) el.textContent = v; };
+    setText("heroTitle", s.heroTitle);
+    setText("heroText", s.heroText);
+    setText("galleryNote", s.galleryNote);
+    ["heroTag","aboutTitle","aboutSub","aboutHeading","aboutP1","aboutP2","aboutP3","servicesTitle","servicesSub",
+     "svc1Title","svc1Text","svc2Title","svc2Text","svc3Title","svc3Text","svc4Title","svc4Text",
+     "galleryTitle","galleryIntro","contactTitle","contactIntro","footerTagline"].forEach(k => setText(k, s[k]));
+ 
+    const ann = document.getElementById("announcement");
+    if (s.announcement) { ann.textContent = s.announcement; ann.hidden = false; } else { ann.hidden = true; }
+ 
+    const orderNum = toIntl(s.orderWhatsapp || s.phone1);
+    if (orderNum) WA_NUMBER = orderNum;
+ 
+    const phones = [s.phone1, s.phone2].filter(p => p && toIntl(p));
+    if (phones.length) {
+        document.getElementById("boxPhones").innerHTML = "<h3>☎ Call or WhatsApp</h3>" + phones.map((p, i) => {
+            const n = toIntl(p);
+            const wa = "https://wa.me/" + n + "?text=" + encodeURIComponent("Hi Nolly, I would like to place an order.");
+            return "<p" + (i ? ' style="margin-top:20px"' : "") + ">" + esc(p) + "</p>" +
+                '<div class="box-actions"><a class="mini-btn" href="tel:+' + n + '">Call</a>' +
+                '<a class="mini-btn mini-wa" href="' + esc(wa) + '" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>';
+        }).join("");
+    }
+ 
+    if (s.email && /^[^\s@"<>]+@[^\s@"<>]+$/.test(s.email)) {
+        document.getElementById("boxEmail").innerHTML = "<h3>✉ Email</h3><p>" + esc(s.email) + "</p>" +
+            '<div class="box-actions"><a class="mini-btn" href="mailto:' + esc(s.email) + "?subject=" + encodeURIComponent("Order enquiry from the website") + '">Send an email</a></div>';
+    }
+ 
+    if (s.address) {
+        const link = (s.mapsLink && s.mapsLink.indexOf("https://") === 0) ? s.mapsLink : "https://maps.app.goo.gl/2btHksqiE79HpRJj7";
+        document.getElementById("boxLocation").innerHTML = "<h3>⌖ Location</h3><p>" +
+            s.address.split("\n").map(l => esc(l.trim())).filter(Boolean).join("<br>") + "</p>" +
+            '<div class="box-actions"><a class="mini-btn" href="' + esc(link) + '" target="_blank" rel="noopener noreferrer">Get directions</a></div>';
+    }
+ 
+    if (s.hoursMain || s.hoursNote) {
+        document.getElementById("boxHours").innerHTML = "<h3>◷ Operating Hours</h3>" +
+            (s.hoursMain ? "<p>" + esc(s.hoursMain) + "</p>" : "") +
+            (s.hoursNote ? "<p>" + esc(s.hoursNote) + "</p>" : "");
+    }
+ 
+    if (s.address || phones.length) {
+        const parts = [];
+        if (s.address) parts.push(s.address.split("\n").map(l => l.trim()).filter(Boolean).join(", "));
+        phones.forEach(p => parts.push(p));
+        document.getElementById("footerContact").textContent = parts.join(" · ");
+    }
+}
+ 
+function renderGallery(items) {
+    const grid = document.getElementById("galleryGrid");
+    const types = ["golf", "caps", "shawls", "bridal", "general"];
+    grid.innerHTML = "";
+    items.filter(i => i.visible !== false && String(i.image || "").indexOf("data:image/") === 0).forEach(i => {
+        const type = types.indexOf(i.type) >= 0 ? i.type : "general";
+        const fig = document.createElement("figure");
+        fig.className = "gallery-item";
+        fig.innerHTML =
+            '<div class="gallery-img"><img src="' + esc(i.image) + '" alt="' + esc(i.title) + '" loading="lazy"></div>' +
+            "<figcaption><h3>" + esc(i.title) + "</h3><p>" + esc(i.text) + "</p>" +
+            '<a href="#contact" data-order="' + type + '" data-title="' + esc(i.title) + '">' + esc(i.btn || "Order now") + "</a></figcaption>";
+        grid.appendChild(fig);
+    });
+}
+ 
+(function connectCloud() {
+    const cfg = window.NOLLY_FIREBASE;
+    if (!cfg || !cfg.apiKey || String(cfg.apiKey).indexOf("PASTE") === 0 || typeof firebase === "undefined") return;
+    try {
+        firebase.initializeApp(cfg);
+        nollyDb = firebase.firestore();
+    } catch (err) { return; }
+ 
+    nollyDb.collection("settings").doc("site").get()
+        .then(doc => { if (doc.exists) applySettings(doc.data()); })
+        .catch(() => {});
+ 
+    nollyDb.collection("gallery").orderBy("order").get()
+        .then(snap => { if (!snap.empty) renderGallery(snap.docs.map(d => d.data())); })
+        .catch(() => {});
+})();
+ 
+</script>
+ 
+</body>
+</html>
+ 
